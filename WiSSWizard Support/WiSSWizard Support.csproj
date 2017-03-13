@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2912EA0A-FCEA-40C6-89CD-071E43407A41}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Actemium.WiSSWizard.Support</RootNamespace>
+    <AssemblyName>WiSSWizard Support</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="RES_OS_2008.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RES_OS_2008.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RES_OS_ALL.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RES_OS_ALL.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RES_OS_VISTA.Designer.cs">
+      <DependentUpon>RES_OS_VISTA.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceHelper.cs" />
+    <Compile Include="RES_OS_W2003.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RES_OS_W2003.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RES_OS_W7.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RES_OS_W7.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RES_OS_XP.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RES_OS_XP.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ToolTipText.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToolTipText.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RES_OS_2008.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RES_OS_2008.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RES_OS_VISTA.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RES_OS_VISTA.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RES_OS_ALL.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>RES_OS_ALL.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RES_OS_W2003.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RES_OS_W2003.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RES_OS_W7.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RES_OS_W7.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RES_OS_XP.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RES_OS_XP.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolTipText.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ToolTipText.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OS_2008\getAllCurrentFirewallExceptions-Win2008.ps1" />
+    <None Include="Resources\OS_ALL\Add-IIS7WebSite.ps1" />
+    <None Include="Resources\OS_ALL\addGroupsToRemoteDesktop.ps1" />
+    <None Include="Resources\OS_ALL\addLocalGroup.ps1" />
+    <None Include="Resources\OS_ALL\AddRuleAdvFirewallPort.ps1" />
+    <None Include="Resources\OS_ALL\AddRuleAdvFirewallProgram.ps1" />
+    <None Include="Resources\OS_ALL\AddSharedFolder.ps1" />
+    <None Include="Resources\OS_ALL\addUser.ps1" />
+    <None Include="Resources\OS_ALL\addUser1.ps1" />
+    <None Include="Resources\OS_ALL\addUserInMultipleGroups.ps1" />
+    <None Include="Resources\OS_ALL\addUserToGroup.ps1" />
+    <None Include="Resources\OS_ALL\addUsertoMultipleGroups.ps1" />
+    <None Include="Resources\OS_ALL\AllLocalUsersDescriptions.ps1" />
+    <None Include="Resources\OS_ALL\AllLocalUsersFullNames.ps1" />
+    <None Include="Resources\OS_ALL\AllLocalUsersNames.ps1" />
+    <None Include="Resources\OS_ALL\checkAllGlobalGroups.ps1" />
+    <None Include="Resources\OS_ALL\checkAllLocalGroups.ps1" />
+    <None Include="Resources\OS_ALL\checkAllLocalUsers.ps1" />
+    <None Include="Resources\OS_ALL\checkAllLocalUsers1.ps1" />
+    <None Include="Resources\OS_ALL\checkRegKeyExist.ps1" />
+    <None Include="Resources\OS_ALL\DeleteRuleAdvFirewall.ps1" />
+    <None Include="Resources\OS_ALL\DeleteUser.ps1" />
+    <None Include="Resources\OS_ALL\DeleteUserGroup.ps1" />
+    <None Include="Resources\OS_ALL\firewallAddException.ps1" />
+    <None Include="Resources\OS_ALL\firewallAddPortException.ps1" />
+    <None Include="Resources\OS_ALL\firewallCheckclosedPorts.ps1" />
+    <None Include="Resources\OS_ALL\firewallCheckCurrentException.ps1" />
+    <None Include="Resources\OS_ALL\firewallCheckCurrentExceptionPrograms.ps1" />
+    <None Include="Resources\OS_ALL\firewallCheckException.ps1" />
+    <None Include="Resources\OS_ALL\firewallDeleteException.ps1" />
+    <None Include="Resources\OS_ALL\firewallGetAllCurrentFirewallExceptions.ps1" />
+    <None Include="Resources\OS_ALL\firewallTurnOnOff.ps1" />
+    <None Include="Resources\OS_ALL\Get-IIS7AllSiteStatus.ps1" />
+    <None Include="Resources\OS_ALL\GetAllSharedFolders.ps1" />
+    <None Include="Resources\OS_ALL\getListofGroupInUser.ps1" />
+    <None Include="Resources\OS_ALL\getListofUsersInGroup.ps1" />
+    <None Include="Resources\OS_ALL\getListOfUsersInRDU.ps1" />
+    <None Include="Resources\OS_ALL\GetRegisterKeyValue.ps1" />
+    <None Include="Resources\OS_ALL\ModifyFirewallRule.ps1" />
+    <None Include="Resources\OS_ALL\modifyUser.ps1" />
+    <None Include="Resources\OS_ALL\RemoveRegisterKey.ps1" />
+    <None Include="Resources\OS_ALL\removeUserFromGroup.ps1" />
+    <None Include="Resources\OS_ALL\SetAutoIpAddresses.ps1" />
+    <None Include="Resources\OS_ALL\SetRegisterKey.ps1" />
+    <None Include="Resources\OS_ALL\SetStaticDNSAddresses.ps1" />
+    <None Include="Resources\OS_ALL\SetStaticIPAddressAndDNS.ps1" />
+    <None Include="Resources\OS_ALL\setWindowsExplorerMapOptions.ps1" />
+    <None Include="Resources\OS_ALL\ShowCurrentControlPolicy.ps1" />
+    <None Include="Resources\OS_ALL\ShowCurrentIPSetting.ps1" />
+    <None Include="Resources\OS_ALL\ShowCurrentPasswordPolicy.ps1" />
+    <None Include="Resources\OS_ALL\ShowCurrentWindowsExplorerSettings.ps1" />
+    <None Include="Resources\OS_ALL\startIISServiceIfStopped.ps1" />
+    <None Include="Resources\OS_W7\getAllCurrentFirewallExceptions-Win7.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\OS_2003\" />
+    <Folder Include="Resources\OS_XP\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\getAllCurrentFirewallExceptions-win7.ps1" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

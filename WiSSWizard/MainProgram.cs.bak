@@ -1,0 +1,471 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Win32;
+using System.Windows.Forms;
+using Actemium.WiSSWizard.Support;
+using Actemium.Diagnostics;
+using Actemium.Security;
+using System.IO;
+using System.Threading;
+using System.Diagnostics;
+using System.ComponentModel;
+
+namespace Actemium.WiSSWizard
+{
+    public class UpdateConfigEventArgs : EventArgs
+    {
+        public string PictureBox { get; private set; }
+        public int Image { get; private set; }
+        public string Label { get; private set; }
+
+        public UpdateConfigEventArgs(string pictureBox, int image, string label)
+        {
+            PictureBox = pictureBox;
+            Image = image;
+            Label = label;
+        }
+    }
+
+    public class MainProgram
+    {
+        const string CLASSNAME = "MainProgram";
+        //parameters
+        public static bool _checkIfthereAreChanges = false;
+        public event UpdateConfigEvent updateConfigOverview;
+        public EventArgs e = null;
+        public delegate void UpdateConfigEvent(MainProgram m, UpdateConfigEventArgs e);
+        
+        private FileHandling _fileHandling;
+        private ConfigClass _configClass;
+        private EncryptionPassword _encryptionPassword;
+
+        private bool _mainRunning = true;
+        public enum mainSteps
+        {
+            start,
+            passWordPolicy,
+            controlPolicy,
+            addUserGroup,
+            addUser,
+            autoPlaySettings,
+            explorerMapOptions,
+            logInShutDownSettings,
+            remoteDesktop,
+            sharing,
+            fireWall,
+            configPcAnywhere,
+            configBlockKeys,
+            configSQLserver,
+            configWebserver,
+            configFTPserver,
+            configMailserver,
+            configMBSA,
+            checkMBSA,
+            end
+        };
+        private bool _MBSAchecked = false;
+
+        public bool MBSAisReady
+        {
+            get
+            {
+                return _mbsaisready;
+            }
+            set
+            {
+                _mbsaisready = value;
+            }
+        }private bool _mbsaisready = false;
+
+        //constructor
+        public MainProgram()
+        { }
+        public MainProgram(ConfigClass configClass)
+        {
+            _configClass = configClass;
+            _fileHandling = new FileHandling(_configClass);
+            _encryptionPassword = new EncryptionPassword(configClass);
+            if (!File.Exists(_encryptionPassword.FilePath))
+            {
+              _encryptionPassword.CreateEncryptedKeyFile();
+            }
+
+        }
+
+        private void UpdateConfigEventHandler(UpdateConfigEventArgs ev)
+        {
+            if (this.updateConfigOverview != null)
+                updateConfigOverview(this, ev);
+        }
+
+        //properties
+
+        public bool StopRunning
+        {
+            set
+            {
+                _mainRunning = value;
+            }
+        }
+        public static bool CheckIfthereAreChanges
+        {
+            get
+            {
+                return _checkIfthereAreChanges;
+            }
+        }
+        public bool CancelMakeSettings
+        {
+            get
+            {
+                return _cancelMakeSettings;
+            }
+            set
+            {
+                _cancelMakeSettings = value;
+            }
+        } private static bool _cancelMakeSettings = false;
+        public mainSteps Mainstep
+        {
+            get
+            {
+                return _mainstep;
+            }
+            set
+            {
+                _mainstep = value;
+            }
+        } private mainSteps _mainstep = mainSteps.start;
+        
+
+        //Main program
+        public void makeSettings(mainSteps ms, OSVersions os)        
+        {
+            if (_cancelMakeSettings)
+            {
+                _mainstep = ms;
+                throw new Exception("cancel"); }
+            
+            if (_mainRunning)
+            {
+                switch (ms)
+                {
+                    case mainSteps.start:
+                        string mbsaLog = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\MBSAlog.txt";
+                        if (File.Exists(mbsaLog))
+                        {
+                            File.Delete(mbsaLog);
+                        }
+                        #region
+                        UpdateConfigEventArgs updtEvPb0s = new UpdateConfigEventArgs("pbConfigCheck0", 1, "");
+                        
+                        UpdateConfigEventHandler(updtEvPb0s);
+                         
+                       _configClass.CreateWindowsRestorePoint();
+                        
+                        if (_configClass.CheckWindowsRestorePointisCreated())
+                        {
+                            UpdateConfigEventArgs updtEvPb0t = new UpdateConfigEventArgs("pbConfigCheck0", 0, "");
+                            UpdateConfigEventHandler(updtEvPb0t);
+                        }
+                        else
+                        {
+                            UpdateConfigEventArgs updtEvPb0f = new UpdateConfigEventArgs("pbConfigCheck0", 2, "");
+                            UpdateConfigEventHandler(updtEvPb0f);
+                            string message1 = "Het niet mogelijk om een Windows herstelpunt te maken\nWeet u zeker dat u wilt doorgaan?";
+                            string caption1 = "Geen herstelpunt";
+                            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+                            DialogResult result;
+                            // Displays the MessageBox.
+                            result = MessageBox.Show(message1, caption1, buttons);
+
+                            if (result == System.Windows.Forms.DialogResult.Cancel)
+                            {
+                                Application.Exit();
+                            }
+                        }
+                        _checkIfthereAreChanges = true;
+                        makeSettings(  mainSteps.passWordPolicy, os);
+                        #endregion
+                        break;
+                    case mainSteps.passWordPolicy:
+                        #region
+                        PasswordPolicy pp = _configClass.ConfSetPasswordPolicy;
+                        UpdateConfigEventArgs updtEvPb1s = new UpdateConfigEventArgs("pbConfigCheck1", 1, "");
+                        UpdateConfigEventHandler(updtEvPb1s);
+                        pp.SetPasswordPolicy(_configClass);
+                        if (pp.CheckPasswordPolicy(_configClass))
+                        {
+                            UpdateConfigEventArgs updtEvPb1t = new UpdateConfigEventArgs("pbConfigCheck1", 0, "");
+                            UpdateConfigEventHandler(updtEvPb1t);
+                        }
+                        else
+                        {
+                            UpdateConfigEventArgs updtEvPb1f = new UpdateConfigEventArgs("pbConfigCheck1", 2, "");
+                            UpdateConfigEventHandler(updtEvPb1f);
+                        }
+                        makeSettings( mainSteps.controlPolicy, os);
+                        #endregion
+                        break;
+                    case mainSteps.controlPolicy:
+                        #region
+                        AuditPolicy ap = _configClass.ConfSetAuditPolicy;
+                        UpdateConfigEventArgs updtEvPb2s = new UpdateConfigEventArgs("pbConfigCheck2", 1, "");
+                        UpdateConfigEventHandler(updtEvPb2s);
+                        ap.CompleteAuditPolicy(_configClass);
+                        if (ap.CheckAuditPolicy(_configClass))
+                        {
+                            UpdateConfigEventArgs updtEvPb1t = new UpdateConfigEventArgs("pbConfigCheck2", 0, "");
+                            UpdateConfigEventHandler(updtEvPb1t);
+                        }
+                        else
+                        {
+                            UpdateConfigEventArgs updtEvPb1f = new UpdateConfigEventArgs("pbConfigCheck2", 2, "");
+                            UpdateConfigEventHandler(updtEvPb1f);
+                        }
+
+                        makeSettings(  mainSteps.addUserGroup, os);
+                        #endregion
+                        break;
+                    case mainSteps.addUserGroup:
+                        #region
+                        WindowsUsergroup wug = _configClass.ConfSetWindowsUsergroup;
+                        UpdateConfigEventArgs updtEvPb3s = new UpdateConfigEventArgs("pbConfigCheck3", 1, "");
+                        UpdateConfigEventHandler(updtEvPb3s);
+                        bool created = false;
+                        bool deleted = false;
+                        wug.DeleteUserGroups(_configClass);
+                        if (wug.CheckUsergroupDeleted(_configClass))
+                        {
+                            deleted = true;
+                        }
+                        wug.AddUserGroups(_configClass);
+                        if (wug.CheckUsergroupCreated(_configClass))
+                        { 
+                            created = true;
+                        }
+
+                        if (created&&deleted)
+                        {
+                            UpdateConfigEventArgs updtEvPb3t = new UpdateConfigEventArgs("pbConfigCheck3", 0, "");
+                            UpdateConfigEventHandler(updtEvPb3t);
+                        }
+                        else
+                        {
+                            UpdateConfigEventArgs updtEvPb3f = new UpdateConfigEventArgs("pbConfigCheck3", 2, "");
+                            UpdateConfigEventHandler(updtEvPb3f);
+                        }
+                        makeSettings(  mainSteps.addUser, os);
+                        #endregion
+                        break;
+                    case mainSteps.addUser:
+                        #region
+                        UpdateConfigEventArgs updtEvPb4s = new UpdateConfigEventArgs("pbConfigCheck4", 1, "");
+                        UpdateConfigEventHandler(updtEvPb4s);
+                        WindowsUsers wu = _configClass.ConfSetWindowsUsers;
+                        wu.DeleteUsers(_configClass);
+                        wu.AddUsers(_configClass,_encryptionPassword);
+                        wu.ModifyUsers(_configClass,_encryptionPassword);
+                        if (wu.CheckUserDeleted(_configClass) && wu.CheckUserCreated(_configClass) && wu.CheckUserModified(_configClass))
+                        {
+                            UpdateConfigEventArgs updtEvPb4t = new UpdateConfigEventArgs("pbConfigCheck4", 0, "");
+                            UpdateConfigEventHandler(updtEvPb4t);
+                        }
+                        else
+                        {
+                            UpdateConfigEventArgs updtEvPb4f = new UpdateConfigEventArgs("pbConfigCheck4", 2, "");
+                            UpdateConfigEventHandler(updtEvPb4f);
+                        }
+                        
+                        makeSettings( mainSteps.autoPlaySettings, os);
+                        #endregion
+                        break;
+                   case mainSteps.autoPlaySettings:
+                        #region
+                        UpdateConfigEventArgs updtEvPb5s = new UpdateConfigEventArgs("pbConfigCheck5", 1, "");
+                        UpdateConfigEventHandler(updtEvPb5s);
+                        AutoPlaySettings aps = _configClass.ConfSetAutoPlaySettings;
+                        aps.MakeAutoplaySettings(os,_configClass);
+                        if (aps.CheckAutoPlaySettings(os,_configClass))
+                        {
+                            UpdateConfigEventArgs updtEvPb5t = new UpdateConfigEventArgs("pbConfigCheck5", 0, "");
+                            UpdateConfigEventHandler(updtEvPb5t);
+                        }
+                        else
+                        {
+                            UpdateConfigEventArgs updtEvPb5f = new UpdateConfigEventArgs("pbConfigCheck5", 2, "");
+                            UpdateConfigEventHandler(updtEvPb5f);
+                        }
+                        makeSettings(  mainSteps.explorerMapOptions, os);
+                        #endregion
+                        break;
+                     case mainSteps.explorerMapOptions:
+                        #region
+                        UpdateConfigEventArgs updtEvPb6s = new UpdateConfigEventArgs("pbConfigCheck6", 1, "");
+                        UpdateConfigEventHandler(updtEvPb6s);
+                        WindowsExplorerSettings WES = _configClass.ConfSetwindowsExplorerSettings;
+                        WES.SetExplorerMapOptions(os,_configClass);
+                        if (WES.CheckexplorerMapOptions(os,_configClass)) 
+                        {
+                            UpdateConfigEventArgs updtEvPb6t = new UpdateConfigEventArgs("pbConfigCheck6", 0, "");
+                            UpdateConfigEventHandler(updtEvPb6t);
+                        }
+                        else
+                        {
+                            UpdateConfigEventArgs updtEvPb6f = new UpdateConfigEventArgs("pbConfigCheck6", 2, "");
+                            UpdateConfigEventHandler(updtEvPb6f);
+                        }
+                        makeSettings(mainSteps.logInShutDownSettings, os);
+                        #endregion
+                        break;
+                    case mainSteps.logInShutDownSettings:
+                        #region autologon
+                        LoginShutdownSettings LISD = _configClass.ConfSetLoginShutdownSettings;
+                        UpdateConfigEventArgs updtEvPb7s = new UpdateConfigEventArgs("pbConfigCheck7", 1, "");
+                        UpdateConfigEventHandler(updtEvPb7s);
+                        LISD.AutlogonSettings(os,_configClass);
+
+                        if (LISD.CheckAutoLogonSettings(os,_configClass))
+                        {
+                            UpdateConfigEventArgs updtEvPb7t = new UpdateConfigEventArgs("pbConfigCheck7", 0, "");
+                            UpdateConfigEventHandler(updtEvPb7t);
+                        }
+                        else
+                        {
+                            UpdateConfigEventArgs updtEvPb7f = new UpdateConfigEventArgs("pbConfigCheck7", 2, "");
+                            UpdateConfigEventHandler(updtEvPb7f);
+                        }
+                        #endregion autologon
+                        if (os != OSVersions.WindowsXP32) //Shutdown event tracker is not working in WinXP 32 bit
+                        {
+                            #region ShutDownEventTracker
+                            UpdateConfigEventArgs updtEvPb8s = new UpdateConfigEventArgs("pbConfigCheck8", 1, "");
+                            UpdateConfigEventHandler(updtEvPb8s);
+                            LISD.SetShutDownEventTracker(os,_configClass);
+                            if (LISD.CheckSetShutDownEventTracker(os,_configClass))
+                            {
+                                UpdateConfigEventArgs updtEvPb8t = new UpdateConfigEventArgs("pbConfigCheck8", 0, "");
+                                UpdateConfigEventHandler(updtEvPb8t);
+                            }
+                            else
+                            {
+                                UpdateConfigEventArgs updtEvPb8f = new UpdateConfigEventArgs("pbConfigCheck8", 2, "");
+                                UpdateConfigEventHandler(updtEvPb8f);
+                            }
+                            #endregion ShutDownEventTracker
+                        }
+                        makeSettings( mainSteps.remoteDesktop, os);
+                        break;
+                    case mainSteps.remoteDesktop:
+                        #region
+                        Remotedesktop RD = _configClass.ConfSetRemotedesktop;
+                        UpdateConfigEventArgs updtEvPb9s = new UpdateConfigEventArgs("pbConfigCheck9", 1, "");
+                        UpdateConfigEventHandler(updtEvPb9s);
+                        RD.SetRemoteDesktopSettings(os,_configClass);
+                        if (RD.CheckRemoteDesktopSettings(os,_configClass))
+                        {
+                            UpdateConfigEventArgs updtEvPb9t = new UpdateConfigEventArgs("pbConfigCheck9", 0, "");
+                            UpdateConfigEventHandler(updtEvPb9t);
+                        }
+                        else
+                        {
+                            UpdateConfigEventArgs updtEvPb9f = new UpdateConfigEventArgs("pbConfigCheck9", 2, "");
+                            UpdateConfigEventHandler(updtEvPb9f);
+                        }
+                        makeSettings( mainSteps.fireWall, os);
+                        #endregion
+                        break;
+                    case mainSteps.fireWall:
+                        #region
+                        WindowsFirewall WFW = _configClass.ConfSetWindowsFirewall;
+                        UpdateConfigEventArgs updtEvPb11s = new UpdateConfigEventArgs("pbConfigCheck10", 1, "");
+                        UpdateConfigEventHandler(updtEvPb11s);
+                        WFW.SetFireWall(_configClass);
+                        if (WFW.CheckFirewallExeceptions(_configClass))
+                        {
+                            UpdateConfigEventArgs updtEvPb11t = new UpdateConfigEventArgs("pbConfigCheck10", 0, "");
+                            UpdateConfigEventHandler(updtEvPb11t);
+                        }
+                        else
+                        {
+                            UpdateConfigEventArgs updtEvPb11f = new UpdateConfigEventArgs("pbConfigCheck10", 2, "");
+                            UpdateConfigEventHandler(updtEvPb11f);
+                        }
+                        makeSettings(  mainSteps.configMBSA, os);
+                        #endregion
+                        break;
+                    case mainSteps.configMBSA:
+                        #region
+                        if (_configClass.ConfSetMicrosoftBaslineSecurityAnalyzer.MBSAchecked && _configClass.ConfInstalledSoftware.IsApplicationInstalled("Microsoft Baseline Security Analyzer"))
+                        {
+                            MicrosoftBaslineSecurityAnalyzer MBSA = _configClass.ConfSetMicrosoftBaslineSecurityAnalyzer;
+                               
+                            UpdateConfigEventArgs updtEvPb18s = new UpdateConfigEventArgs("pbConfigCheck11", 1, "");
+                            UpdateConfigEventHandler(updtEvPb18s);
+
+                            if (MBSA.SetMBSA(_configClass))
+                            {
+                                    UpdateConfigEventArgs updtEvPb18t = new UpdateConfigEventArgs("pbConfigCheck11", 0, "");
+                                    UpdateConfigEventHandler(updtEvPb18t);
+                                    MBSA.MBSAstate = true;
+                                    MBSAisReady = true;
+
+                                    if (MBSA.MBSAkilled)
+                                    {
+                                        UpdateConfigEventArgs updtEvPb18f = new UpdateConfigEventArgs("pbConfigCheck11", 2, "");
+                                        UpdateConfigEventHandler(updtEvPb18f);        
+                                    }
+                            }
+                            else
+                            {
+                                UpdateConfigEventArgs updtEvPb18f = new UpdateConfigEventArgs("pbConfigCheck11", 2, "");
+                                UpdateConfigEventHandler(updtEvPb18f);
+                            }
+                        }
+                        else
+                        {
+                            UpdateConfigEventArgs updtEvPb18f = new UpdateConfigEventArgs("pbConfigCheck11", 5, "");
+                            UpdateConfigEventHandler(updtEvPb18f);
+                        }
+
+                        makeSettings(mainSteps.end, os);
+
+                        #endregion
+                        break;
+                    case mainSteps.end:
+                        #region
+                        string encryptionPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\ConfigFiles\configPw.dat";
+        
+                      if(File.Exists( encryptionPath))
+                      {
+                        File.Delete(encryptionPath);
+                      }
+                        CreateStartupProcessForOtherAccounts CSPA = _configClass.ConfSetCreateStartupProcessForOtherAccounts;
+                        UpdateConfigEventArgs updtEvPb19s = new UpdateConfigEventArgs("pbConfigCheck12", 1, "");
+                        UpdateConfigEventHandler(updtEvPb19s);
+                        CSPA.CreateRegFileAndStartupBatchFile(os,_configClass);
+                        if (CSPA.CheckEndCreateRegFileAndStartupBatchFile(os,_configClass))
+                        {
+                            UpdateConfigEventArgs updtEvPb19t = new UpdateConfigEventArgs("pbConfigCheck12", 0, "");
+                            UpdateConfigEventHandler(updtEvPb19t);
+                        }
+                        else
+                        {
+                            UpdateConfigEventArgs updtEvPb19f = new UpdateConfigEventArgs("pbConfigCheck12", 2, "");
+                            UpdateConfigEventHandler(updtEvPb19f);
+                        }
+                        #endregion
+                        _mainRunning = false;
+                        break;
+                        
+                }
+            }
+        }
+
+
+
+        
+    }
+}

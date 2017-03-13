@@ -1,0 +1,10 @@
+Param($ShareName)
+
+$ShareName.Delete()
+
+
+
+
+
+
+

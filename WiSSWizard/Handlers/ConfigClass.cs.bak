@@ -1,0 +1,341 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+using System.Xml;
+
+namespace Actemium.WiSSWizard
+{
+    [XmlRootAttribute(ElementName = "ConfigClass", IsNullable = false)]
+    public class ConfigClass
+    {
+        private const string CLASSNAME = "ConfigClass";
+
+        public ConfigClass()
+        {
+            _scriptHandling = new ScriptHandling(this);
+            _defaultInformation = new DefaultInformation();
+            _installedSoftware = new InstalledSoftware();
+            _passwordPolicy = new PasswordPolicy();
+            _auditPolicy = new AuditPolicy();
+            _windowsUsergroup = new WindowsUsergroup();
+            _windowsUsers = new WindowsUsers(this);
+            _autoPlaySettings = new AutoPlaySettings();
+            _windowsExplorerSettings = new WindowsExplorerSettings();
+            _loginShutdownSettings = new LoginShutdownSettings();
+            _remotedesktop = new Remotedesktop();
+            _windowsFirewall = new WindowsFirewall();
+            _microsoftBaslineSecurityAnalyzer = new MicrosoftBaslineSecurityAnalyzer();
+            _createStartupProcessForOtherAccounts = new CreateStartupProcessForOtherAccounts();
+
+        }
+        public ScriptHandling GetScriptHandling
+        {
+            get
+            {
+                return _scriptHandling;
+            }
+            set
+            {
+                _scriptHandling = value;
+            }
+        } private ScriptHandling _scriptHandling;
+        public DefaultInformation ConfSetDefaultInformation
+        {
+            get
+            {
+                return _defaultInformation;
+            }
+            set
+            {
+                _defaultInformation = value;
+            }
+        }private DefaultInformation _defaultInformation;
+        public InstalledSoftware ConfInstalledSoftware
+        {
+            get
+            {
+                return _installedSoftware;
+            }
+            set
+            {
+                _installedSoftware = value;
+            }
+        } private InstalledSoftware _installedSoftware;
+        public PasswordPolicy ConfSetPasswordPolicy
+        {
+            get
+            {
+                return _passwordPolicy;
+            }
+            set
+            {
+                _passwordPolicy = value;
+            }
+        } private PasswordPolicy _passwordPolicy;
+        public AuditPolicy ConfSetAuditPolicy
+        {
+            get
+            {
+                return _auditPolicy;
+            }
+            set
+            {
+                _auditPolicy = value;
+            }
+        }private AuditPolicy _auditPolicy;
+        public WindowsUsergroup ConfSetWindowsUsergroup
+        {
+            get
+            {
+                return _windowsUsergroup;
+            }
+            set
+            {
+                _windowsUsergroup = value;
+            }
+        }private WindowsUsergroup _windowsUsergroup;
+        public WindowsUsers ConfSetWindowsUsers
+        {
+            get
+            {
+                return _windowsUsers;
+            }
+            set
+            {
+                _windowsUsers = value;
+            }
+        }private WindowsUsers _windowsUsers;
+        public AutoPlaySettings ConfSetAutoPlaySettings
+        {
+            get
+            {
+                return _autoPlaySettings;
+            }
+            set
+            {
+                _autoPlaySettings = value;
+            }
+        }private AutoPlaySettings _autoPlaySettings;
+        public WindowsExplorerSettings ConfSetwindowsExplorerSettings
+        {
+            get
+            {
+                return _windowsExplorerSettings;
+            }
+            set
+            {
+                _windowsExplorerSettings = value;
+            }
+        }private WindowsExplorerSettings _windowsExplorerSettings;
+        public LoginShutdownSettings ConfSetLoginShutdownSettings
+        {
+            get
+            {
+                return _loginShutdownSettings;
+            }
+            set
+            {
+                _loginShutdownSettings = value;
+            }
+        }private LoginShutdownSettings _loginShutdownSettings;
+        public Remotedesktop ConfSetRemotedesktop
+        {
+            get
+            {
+                return _remotedesktop;
+            }
+            set
+            {
+                _remotedesktop = value;
+            }
+        } private Remotedesktop _remotedesktop;
+        public WindowsFirewall ConfSetWindowsFirewall
+        {
+            get
+            {
+                return _windowsFirewall;
+            }
+            set
+            {
+                _windowsFirewall = value;
+            }
+        } private WindowsFirewall _windowsFirewall;
+        public MicrosoftBaslineSecurityAnalyzer ConfSetMicrosoftBaslineSecurityAnalyzer
+        {
+            get
+            {
+                return _microsoftBaslineSecurityAnalyzer;
+            }
+            set
+            {
+                _microsoftBaslineSecurityAnalyzer = value;
+            }
+        } private MicrosoftBaslineSecurityAnalyzer _microsoftBaslineSecurityAnalyzer;
+        public CreateStartupProcessForOtherAccounts ConfSetCreateStartupProcessForOtherAccounts
+        {
+            get
+            {
+                return _createStartupProcessForOtherAccounts;
+            }
+            set
+            {
+                _createStartupProcessForOtherAccounts = value;
+            }
+        } private CreateStartupProcessForOtherAccounts _createStartupProcessForOtherAccounts;
+        public ConfigErrors ConfSetConfigErrors
+        {
+            get
+            {
+                return _configErrors;
+            }
+            set
+            {
+                _configErrors = value;
+            }
+        } private ConfigErrors _configErrors = new ConfigErrors();
+
+        public List<ConfigErrors> ErrorList
+        {
+            get
+            {
+                return _errorList;
+            }
+            set
+            {
+                _errorList = value;
+            }
+        } private List<ConfigErrors> _errorList = new List<ConfigErrors>();
+        public string ErrorOverviewComment
+        {
+            get
+            {
+                return _errorOverviewComment;
+            }
+            set
+            {
+                _errorOverviewComment = value;
+            }
+        } private string _errorOverviewComment = "";
+
+        public String Serialize(string stylesheetType)
+        {
+            try
+            {
+                String XmlizedString = null;
+                MemoryStream memoryStream = new MemoryStream();
+                XmlSerializer xs = new XmlSerializer(this.GetType());
+                XmlTextWriter xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);
+                xmlTextWriter.WriteProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"" + "ActemiumStyleSheet.xsl" + "\"");             
+                xs.Serialize(xmlTextWriter, this, new XmlSerializerNamespaces());
+                memoryStream = (MemoryStream)xmlTextWriter.BaseStream;
+                XmlizedString = new UTF8Encoding().GetString(memoryStream.ToArray());
+                return XmlizedString;
+            }
+            catch
+            {
+
+                return null;
+            }
+        }
+        public static ConfigClass Deserialize(String pXmlizedString)
+        {
+            try
+            {
+                if (pXmlizedString != null)
+                {
+                    XmlSerializer xs = new XmlSerializer(typeof(ConfigClass));
+                    MemoryStream memoryStream = new MemoryStream(new UTF8Encoding().GetBytes(pXmlizedString));
+                    XmlTextWriter xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);
+
+                    return (ConfigClass)xs.Deserialize(memoryStream);
+                }
+                else
+                    return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private string _restorePointDescription = "";
+        public void CreateWindowsRestorePoint()
+        {
+            
+            try
+            {
+                string time;
+                DateTime dt = DateTime.Now;
+                string hour = "";
+                string minute = "";
+                string second = "";
+                if (dt.Hour < 10) { hour = "0" + dt.Hour.ToString(); }
+                else { hour = dt.Hour.ToString(); }
+
+                if (dt.Minute < 10) { minute = "0" + dt.Minute.ToString(); }
+                else { minute = dt.Minute.ToString(); }
+
+                if (dt.Second < 10) { second = "0" + dt.Second.ToString(); }
+                else { second = dt.Second.ToString(); }
+                time = (hour + "." + minute + "." + second + " hr");
+                _restorePointDescription = "Actemium Security Checklist Application " + time;
+                GetScriptHandling.CreateWindowsRestorePoint(_restorePointDescription);
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Create Windows Restore Point", CLASSNAME, ex);
+                ErrorList.Add(new ConfigErrors(CLASSNAME, "Create Windows Restore Point", ex.Message));
+            }
+        }
+        public bool CheckWindowsRestorePointisCreated()
+        {
+            string restorePointNr = "";
+            bool check = false;
+            try
+            {
+
+                foreach (string str in GetScriptHandling.GetWindowsRestorePoints())
+                {
+                    if (str.Contains(_restorePointDescription))
+                    {
+                        string[] splitStr = str.Split(' ');
+                        restorePointNr = splitStr[0];
+                        check = true;
+                        string path = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\ConfigFiles\restorePoint.inf";
+                        File.Delete(path);
+                        FileHandling fh = new FileHandling();
+                        fh.CreateFile(path);
+                        fh.AddLineToEndFile(path, restorePointNr);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Check Windows Restore Point is created", CLASSNAME, ex);
+
+                ErrorList.Add(new ConfigErrors(CLASSNAME, "Check Windows Restore Point is created", ex.Message));
+
+            }
+            return check;
+        }
+        public void RestoreSettings()
+        {
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result;
+            result = MessageBox.Show("Windows zal uw systeem herstellen naar de instellingen zoals ze waren voordat u deze applicatie heeft gestart.\n Sluit al uw werk af voordat u verder gaat", "Systeem Herstel", buttons);
+
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                FileHandling fileHandling = new FileHandling();
+                string path = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\ConfigFiles\restorePoint.inf";
+                string restorPoint = fileHandling.ReadWholeFile(path)[0];
+                GetScriptHandling.RestoreSettings(restorPoint);
+            }
+        }
+    }
+}
+

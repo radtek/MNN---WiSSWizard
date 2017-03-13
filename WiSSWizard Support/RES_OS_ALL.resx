@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    firewallCheckException
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="addLocalGroup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\addLocalGroup.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="addUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\addUser.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="addUser1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\addUser1.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="checkAllLocalGroups" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\checkAllLocalGroups.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="checkAllGlobalGroups" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\checkAllGlobalGroups.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="checkAllLocalUsersNames" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\checkAllLocalUsers.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="checkRegKeyExist" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\checkRegKeyExist.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EMOClassicViewState" xml:space="preserve">
+    <value>ClassicViewState</value>
+    <comment>EMO = Explorer Map Options</comment>
+  </data>
+  <data name="EMOFullPathAddress" xml:space="preserve">
+    <value>FullPathAddress</value>
+    <comment>EMO = Explorer Map Options</comment>
+  </data>
+  <data name="EMOHidden" xml:space="preserve">
+    <value>Hidden</value>
+    <comment>EMO = Explorer Map Options</comment>
+  </data>
+  <data name="EMOHideFileExt" xml:space="preserve">
+    <value>HideFileExt</value>
+    <comment>EMO = Explorer Map Options</comment>
+  </data>
+  <data name="EMONoNetCrawling" xml:space="preserve">
+    <value>NoNetCrawling</value>
+    <comment>EMO = Explorer Map Options</comment>
+  </data>
+  <data name="EMOregPathfolderOptionsAdvanced" xml:space="preserve">
+    <value>HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced</value>
+    <comment>EMO = Explorer Map Options</comment>
+  </data>
+  <data name="EMOregPathfolderOptionsCabinetState" xml:space="preserve">
+    <value>HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState</value>
+    <comment>EMO = Explorer Map Options</comment>
+  </data>
+  <data name="EMOShowCompColor" xml:space="preserve">
+    <value>ShowCompColor</value>
+    <comment>EMO = Explorer Map Options</comment>
+  </data>
+  <data name="EMOShowSuperHidden" xml:space="preserve">
+    <value>ShowSuperHidden</value>
+    <comment>EMO = Explorer Map Options</comment>
+  </data>
+  <data name="EMOWebViewBarricade" xml:space="preserve">
+    <value>WebViewBarricade</value>
+    <comment>EMO = Explorer Map Options</comment>
+  </data>
+  <data name="firewallAddException" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\firewallAddException.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="firewallCheckException" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\firewallCheckException.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="firewallCheckCurrentException" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\firewallCheckCurrentException.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="firewallTurnOnOff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\firewallTurnOnOff.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="APRegKeyNoDriveTypeAutoRun" xml:space="preserve">
+    <value>NoDriveTypeAutoRun</value>
+    <comment>Reg key autoplay Settings</comment>
+  </data>
+  <data name="AutoPlaySettingRegPath" xml:space="preserve">
+    <value>HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer</value>
+    <comment>Reg path autoplay Settings</comment>
+  </data>
+  <data name="SetRegisterKey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\SetRegisterKey.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="RemoveRegisterKey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\RemoveRegisterKey.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AutoAdminLogon" xml:space="preserve">
+    <value>AutoAdminLogon</value>
+    <comment>Reg path autologon Settings</comment>
+  </data>
+  <data name="AutoLogonDomainName" xml:space="preserve">
+    <value>DefaultDomainName</value>
+    <comment> autologon Settings</comment>
+  </data>
+  <data name="AutoLogonPassword" xml:space="preserve">
+    <value>DefaultPassword</value>
+    <comment> autologon Settings</comment>
+  </data>
+  <data name="AutoLogonRegPath" xml:space="preserve">
+    <value>HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon</value>
+    <comment> autologon Settings</comment>
+  </data>
+  <data name="AutoLogonUsername" xml:space="preserve">
+    <value>DefaultUserName</value>
+    <comment> autologon Settings</comment>
+  </data>
+  <data name="SDEVTRegKeyOnShutdownReasonUI" xml:space="preserve">
+    <value>ShutdownReasonUI</value>
+    <comment>SDEVT= Shut down event tracker</comment>
+  </data>
+  <data name="SDEVTRegPath" xml:space="preserve">
+    <value>HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Reliability</value>
+    <comment>SDEVT= Shut down event tracker</comment>
+  </data>
+  <data name="SDEVTRegKeyShutdownReason" xml:space="preserve">
+    <value>ShutdownReasonON</value>
+    <comment>SDEVT= Shut down event tracker</comment>
+  </data>
+  <data name="addUserToGroup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\addUserToGroup.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="addGroupsToRemoteDesktop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\addGroupsToRemoteDesktop.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="getListofUsersInGroup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\getListofUsersInGroup.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="removeUserFromGroup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\removeUserFromGroup.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="getListOfUsersInRDU" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\getListOfUsersInRDU.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="RemoteDesktopEnableLessSecureRegKey" xml:space="preserve">
+    <value>fDenyTSConnections</value>
+    <comment>Remote desktop</comment>
+  </data>
+  <data name="RemoteDesktopEnableLessSecureRegPath" xml:space="preserve">
+    <value>HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server</value>
+    <comment>Remote desktop</comment>
+  </data>
+  <data name="FirstLogonPath" xml:space="preserve">
+    <value>HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</value>
+    <comment>This script runs by first Logon</comment>
+  </data>
+  <data name="GetRegisterKeyValue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\GetRegisterKeyValue.ps1;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="checkAllLocalUserInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\checkAllLocalUsers1.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="firewallCheckclosedPorts" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\firewallCheckclosedPorts.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AllLocalUsersDescriptions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\AllLocalUsersDescriptions.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AllLocalUsersFullNames" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\AllLocalUsersFullNames.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AllLocalUsersNames" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\AllLocalUsersNames.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="modifyUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\modifyUser.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="DeleteUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\DeleteUser.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="DeleteUserGroup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\DeleteUserGroup.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ShowCurrentPasswordPolicy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\ShowCurrentPasswordPolicy.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ShowCurrentIPSetting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\ShowCurrentIPSetting.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ShowCurrentControlPolicy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\ShowCurrentControlPolicy.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ShowCurrentWindowsExplorerSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\ShowCurrentWindowsExplorerSettings.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="SetStaticIPAddressAndDNS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\SetStaticIPAddressAndDNS.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="SetAutoIpAddresses" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\SetAutoIpAddresses.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="SetStaticDNSAddresses" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\SetStaticDNSAddresses.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="getListofGroupInUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\getListofGroupInUser.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="firewallDeleteException" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\firewallDeleteException.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Add-IIS7WebSite" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\Add-IIS7WebSite.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Get-IIS7AllSiteStatus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\Get-IIS7AllSiteStatus.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  
+  <data name="firewallAddPortException" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\firewallAddPortException.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="firewallCheckCurrentExceptionPrograms" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\firewallCheckCurrentExceptionPrograms.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="startIISServiceIfStopped" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\startIISServiceIfStopped.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="GetAllSharedFolders" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\GetAllSharedFolders.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AddSharedFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\AddSharedFolder.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="firewallGetAllCurrentFirewallExceptions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\firewallGetAllCurrentFirewallExceptions.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AddRuleAdvFirewallPort" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\AddRuleAdvFirewallPort.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="AddRuleAdvFirewallProgram" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\AddRuleAdvFirewallProgram.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="DeleteRuleAdvFirewall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\DeleteRuleAdvFirewall.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ModifyFirewallRule" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OS_ALL\ModifyFirewallRule.ps1;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+
+</root>

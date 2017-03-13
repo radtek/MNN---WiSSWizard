@@ -1,0 +1,14 @@
+[Version]
+signature="$CHICAGO$"
+Revision=1
+
+[Event Audit]
+AuditLogonEvents = 3
+AuditAccountLogon = 3
+AuditAccountManage = 3
+AuditDSAccess = 2
+AuditPolicyChange = 3
+AuditPrivilegeUse  = 0
+AuditObjectAccess = 2
+AuditProcessTracking = 0
+AuditSystemEvents = 3

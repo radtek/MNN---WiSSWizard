@@ -1,0 +1,2 @@
+netsh firewall show portopening
+

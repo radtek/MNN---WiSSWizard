@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FE5DDEF9-D723-4504-B3F0-819DD221D6E2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Actemium.SecurityChecker</RootNamespace>
+    <AssemblyName>WiSS wizard</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Actemium.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Actemium.Diagnostics, Version=2.9.4274.15868, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\Actemium.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="Actemium.Security">
+      <HintPath>..\Assemblies\Actemium.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Actemium.Windows.Forms">
+      <HintPath>..\Assemblies\Actemium.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar2, Version=7.6.0.0, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OSVersionInfoDLL">
+      <HintPath>.\OSVersionInfoDLL.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\System.Management.Automation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConfigHandling\ConfigHandlerNavigation.cs" />
+    <Compile Include="ConfigHandling\Settings.cs" />
+    <Compile Include="CreateDefaultConfiguration.cs" />
+    <Compile Include="EncryptionPassword.cs" />
+    <Compile Include="FileHandling.cs" />
+    <Compile Include="Handlers\AuditPolicy.cs" />
+    <Compile Include="Handlers\AutoPlaySettings.cs" />
+    <Compile Include="Handlers\ConfigClass.cs" />
+    <Compile Include="Handlers\ConfigErrors.cs" />
+    <Compile Include="Handlers\CreateStartupProcessForOtherAccounts.cs" />
+    <Compile Include="Handlers\DefaultInformation.cs" />
+    <Compile Include="Handlers\InstalledSoftware.cs" />
+    <Compile Include="Handlers\LoginShutdownSettings.cs" />
+    <Compile Include="Handlers\MicrosoftBaslineSecurityAnalyzer.cs" />
+    <Compile Include="Handlers\NoDefaultSettingsLog.cs" />
+    <Compile Include="Handlers\PasswordPolicy.cs" />
+    <Compile Include="Handlers\Remotedesktop.cs" />
+    <Compile Include="Handlers\WindowsExplorerSettings.cs" />
+    <Compile Include="Handlers\WindowsFirewall.cs" />
+    <Compile Include="Handlers\WindowsUsergroup.cs" />
+    <Compile Include="Handlers\WindowsUsers.cs" />
+    <Compile Include="Handlers\XMLhandler.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainProgram.cs" />
+    <Compile Include="NavigationHandler.cs" />
+    <Compile Include="OSVersionInfoClass.cs" />
+    <Compile Include="Pages\BaseFormPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\CheckCurrentSafety.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\CheckCurrentSafety.Designer.cs">
+      <DependentUpon>CheckCurrentSafety.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CtrlError.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\CtrlError.Designer.cs">
+      <DependentUpon>CtrlError.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CtrlHome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\CtrlHome.Designer.cs">
+      <DependentUpon>CtrlHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ModifyUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\ModifyUser.Designer.cs">
+      <DependentUpon>ModifyUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordGenerator.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptHandling.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\BaseFormPage.resx">
+      <DependentUpon>BaseFormPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\CheckCurrentSafety.resx">
+      <DependentUpon>CheckCurrentSafety.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\CtrlError.resx">
+      <DependentUpon>CtrlError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\CtrlHome.resx">
+      <DependentUpon>CtrlHome.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\ModifyUser.resx">
+      <DependentUpon>ModifyUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ConfigFiles\FirstLogon\firstLogon.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Actemium.ico" />
+    <Content Include="ConfigFiles\FirstLogon\FirstLogon.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Actemium.ico" />
+    <Content Include="Resources\btnAbort.png" />
+    <Content Include="Resources\btnActivate.png" />
+    <Content Include="Resources\btnAdd.png" />
+    <Content Include="Resources\btnCancel.png" />
+    <Content Include="Resources\btnConnect.png" />
+    <Content Include="Resources\btnDelete.png" />
+    <Content Include="Resources\btnDeselectAll.png" />
+    <Content Include="Resources\btnDown.png" />
+    <Content Include="Resources\btnDuplicate.png" />
+    <Content Include="Resources\btnEdit.png" />
+    <Content Include="Resources\btnInvoice.png" />
+    <Content Include="Resources\btnInvoiceCancel.png" />
+    <Content Include="Resources\btnLeft.png" />
+    <Content Include="Resources\btnLogin.png" />
+    <Content Include="Resources\btnLogout.png" />
+    <Content Include="Resources\btnOk.png" />
+    <Content Include="Resources\btnPrint.png" />
+    <Content Include="Resources\btnProperties.png" />
+    <Content Include="Resources\btnRefresh.png" />
+    <Content Include="Resources\btnRight.png" />
+    <Content Include="Resources\btnSelectAll.png" />
+    <Content Include="Resources\btnTriggerStarlims.gif" />
+    <Content Include="Resources\btnUp.png" />
+    <Content Include="Resources\Busy.gif" />
+    <Content Include="Resources\Exclamation.png" />
+    <Content Include="Resources\Filter.png" />
+    <Content Include="Resources\FolderClosed.png" />
+    <Content Include="Resources\FolderOpen.png" />
+    <Content Include="Resources\Question.gif" />
+    <Content Include="Resources\Question_24.gif" />
+    <Content Include="Resources\report_24.gif" />
+    <Content Include="Resources\SQLRS_24.gif" />
+    <Content Include="stylesheets\Actemium.xsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="stylesheets\TotalOverviewActemium.xsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="stylesheets\error.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="stylesheets\Error.xsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Security Checklist Helpers\Security Checklist Helpers.csproj">
+      <Project>{2912EA0A-FCEA-40C6-89CD-071E43407A41}</Project>
+      <Name>Security Checklist Helpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

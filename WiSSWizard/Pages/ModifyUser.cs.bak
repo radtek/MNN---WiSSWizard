@@ -1,0 +1,251 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.DirectoryServices.AccountManagement;
+
+namespace Actemium.WiSSWizard.Pages
+{
+    public partial class ModifyUser : BaseFormPage
+    {
+        //Parameters
+        PrincipalContext domain = new PrincipalContext(ContextType.Machine);
+        UserPrincipal userPrincipal;
+        private string _changeFullname = "";
+        private string _changeDescription = "";
+        private string _changeGroup="";
+        private string _changePassword = "";
+        private bool _changePasswordChangeNextLogon = false;
+        private bool _changePasswordCantBeChanged = false;
+        private bool _changePasswordNeverExpires = false;
+        private bool _changeAccountDisabled = false;
+        private bool _modifyOtherSettings = false;
+        private CtrlHome _ctrlhome;
+        //constuctors
+        public ModifyUser()
+        {
+            InitializeComponent();
+        }
+
+        public ModifyUser(string userName, CtrlHome ctrl)
+        {
+            InitializeComponent();
+            try
+            {
+                userPrincipal = UserPrincipal.FindByIdentity(domain, IdentityType.Name, userName);
+                lbUserName.Text = userPrincipal.Name;
+                tbUserFullName.Text = userPrincipal.DisplayName;
+                tbUserDescription.Text = userPrincipal.Description;
+                //cbChangePwNextLogon.Checked = true;
+                cbPaswordNeverExpires.Checked = userPrincipal.PasswordNeverExpires;
+                cbPaswordCantBeChanged.Checked = userPrincipal.UserCannotChangePassword;
+                cbAccountDisabled.Checked = userPrincipal.IsAccountLockedOut();
+                _ctrlhome = ctrl;
+            }
+            catch
+            {
+
+            }
+        }
+        public ModifyUser(string name, string fullname, string description, string group, bool ChangePwNextLogon, bool PasswordCantBeChanged, bool PasswordNeverExpires, bool AccountDisabled, string password, CtrlHome ch, object[] comboBoxItems)
+        {
+            InitializeComponent();
+            if (group.Length != 0)
+            {
+                lbUserGroups.Visible = true;
+                cbUserGroups.Visible = true;
+                cbUserGroups.Text = group;
+                cbUserGroups.Items.AddRange(comboBoxItems);
+            }
+            lbUserName.Text = name;
+            tbUserFullName.Text = fullname;
+            tbUserDescription.Text = description;
+            tbNewPasword1.Text = password;
+            tbNewPasword2.Text = password;
+            cbChangePwNextLogon.Checked = ChangePwNextLogon;
+            cbPaswordCantBeChanged.Checked = PasswordCantBeChanged;
+            cbPaswordNeverExpires.Checked = PasswordNeverExpires;
+            cbAccountDisabled.Checked = AccountDisabled;
+            _ctrlhome = ch;
+        }
+
+        //Properties
+        public string ChangeFullname
+        {
+            get
+            { return _changeFullname; }
+        }
+        public string ChangeDescription
+        {
+            get
+            { return _changeDescription; }
+        }
+        public string ChangePassword
+        {
+            get
+            { return _changePassword; }
+        }
+
+        public string ChangeGroup
+        {
+            get
+            { return _changeGroup; }
+        }
+        public bool ChangePasswordChangeNextLogon
+        {
+            get
+            { return _changePasswordChangeNextLogon; }
+        }
+        public bool ChangePasswordCantBeChanged
+        {
+            get
+            { return _changePasswordCantBeChanged; }
+        }
+        public bool ChangePasswordNeverExpires
+        {
+            get
+            { return _changePasswordNeverExpires; }
+        }
+        public bool ChangeAccountDisabled
+        {
+            get
+            { return _changeAccountDisabled; }
+        }
+        public bool ModifyOtherSettings
+        {
+            get
+            { return _modifyOtherSettings; }
+        }
+
+        //Methods
+
+        private void cbChangePwNextLogon_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbChangePwNextLogon.Checked == true)
+            {
+                cbPaswordCantBeChanged.Enabled = false;
+                cbPaswordCantBeChanged.Checked = false;
+                cbPaswordNeverExpires.Enabled = false;
+                cbPaswordNeverExpires.Checked = false;
+            }
+            else
+            {
+                cbPaswordCantBeChanged.Enabled = true;
+                cbPaswordNeverExpires.Enabled = true;
+            }
+        }
+        private void cbPaswordCantBeChanged_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbPaswordCantBeChanged.Checked == true)
+            {
+                cbChangePwNextLogon.Enabled = false;
+                cbChangePwNextLogon.Checked = false;
+            }
+            else
+            {
+                if (!cbPaswordNeverExpires.Checked)
+                {
+                    cbChangePwNextLogon.Enabled = true;
+                }
+            }
+        }
+        private void cbPaswordNeverExpires_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbPaswordNeverExpires.Checked == true)
+            {
+                cbChangePwNextLogon.Enabled = false;
+                cbChangePwNextLogon.Checked = false;
+            }
+            else
+            {
+                if (!cbPaswordCantBeChanged.Checked)
+                {
+                    cbChangePwNextLogon.Enabled = true;
+                }
+            }
+        }
+        
+
+
+        private void btModifyUser_Click(object sender, EventArgs e)
+        {
+            if (SetValues())
+            {
+
+                    this.DialogResult = DialogResult.OK;
+            }
+            else
+            {        
+                this.DialogResult = DialogResult.None;
+            }
+            
+            //this.DialogResult = DialogResult.OK;
+            
+
+        }
+
+        public bool SetValues()
+        {
+            bool check = true;
+            errorProvider1.Clear();
+            _changeFullname = tbUserFullName.Text;
+            _changeDescription = tbUserDescription.Text;
+            _changeGroup = cbUserGroups.Text;
+            _changePassword = "";
+            _changePasswordChangeNextLogon = cbChangePwNextLogon.Checked;
+            _changePasswordCantBeChanged = cbPaswordCantBeChanged.Checked;
+            _changePasswordNeverExpires = cbPaswordNeverExpires.Checked;
+            _changeAccountDisabled = cbAccountDisabled.Checked;
+            _modifyOtherSettings = cbMakeOtherSettings.Checked;
+
+            if (tbNewPasword1.Text.Length != 0 || tbNewPasword2.Text.Length!=0)
+            {
+                if (tbNewPasword1.Text.Length != 0 && tbNewPasword2.Text.Length != 0 && tbNewPasword1.Text == tbNewPasword2.Text)
+                {
+                    if (_ctrlhome.CheckPasswordPolicy(tbNewPasword1.Text))
+                    {
+                        if(_ctrlhome.CheckPasswordIsNotontheBadList(tbNewPasword1.Text))
+                        {
+                        _changePassword = tbNewPasword1.Text;
+                        btModifyUser.DialogResult = System.Windows.Forms.DialogResult.OK;
+                        }
+                        else
+                        {
+                            errorProvider1.SetError(tbNewPasword1, "Het gekozen wachtwoord staat op de verboden wachtwoorden lijst\nKies een ander wachtwoord.");
+                            check = false;
+                        }
+                    }
+                    else
+                    {
+                        errorProvider1.SetError(tbNewPasword1, "Het wachtwoord voldoet niet aan de vereisten voor het wachtwoordbeleid.");
+                        check = false;
+                    }
+                }
+                else
+                {
+                    // wachtwoorden komen niet overeen
+                    errorProvider1.SetError(tbNewPasword1, "De ingevulde wachtwoorden komen niet overeen");
+                    check = false;
+                }
+            }
+            return check;
+        }
+
+        private void cbMakeOtherSettings_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbMakeOtherSettings.Checked)
+            {
+                gbSettings.Enabled = true; 
+            }
+            else
+            {
+                gbSettings.Enabled = false; 
+            }
+        }
+
+    }
+}

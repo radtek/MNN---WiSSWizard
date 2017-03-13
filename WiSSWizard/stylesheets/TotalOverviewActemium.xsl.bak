@@ -1,0 +1,1424 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- Edited by XMLSpy® -->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="/">
+  <html>
+    <head>
+      <style type="text/css">
+        body {
+        font-family: Arial, Helvetica, Geneva, SunSans-Regular, sans-serif;
+        margin:0px 0px 0px 20px;
+        }
+        h2 {font-family: Arial, Helvetica, Geneva, SunSans-Regular, sans-serif
+        }
+        h4 {
+        font-family: Arial, Helvetica, Geneva, SunSans-Regular, sans-serif;
+        margin:10px 0px 0px 0px;
+
+        }
+
+      </style>
+    
+    </head>
+  <body>
+
+    <h2>Actemium WiSS - Windows Security Setup</h2>
+
+    <table border="0">
+      <td WIDTH="300"> </td>
+      <tr>
+        <td>
+          Datum:
+        </td>
+        <td>
+          <xsl:value-of select="ConfigClass/ConfSetDefaultInformation/ConfigDateTime"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Voornaam:
+        </td>
+        <td>
+          <xsl:value-of select="ConfigClass/ConfSetDefaultInformation/ApplicationUserName"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Achternaam:
+        </td>
+        <td>
+          <xsl:value-of select="ConfigClass/ConfSetDefaultInformation/ApplicationFamilyName"/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Besturingssysteem:
+        </td>
+        <td>
+          <xsl:value-of select="ConfigClass/ConfSetDefaultInformation/Operatingsystem"/>
+        </td>
+      </tr>
+
+      <xsl:if test="ConfigClass/ConfSetDefaultInformation/TypicalConfiguration = 'true'">
+        <tr>
+          <td>
+            Type configuratie:
+          </td>
+          <td>
+            Standaard
+          </td>
+        </tr>
+      </xsl:if>
+      <xsl:if test="ConfigClass/ConfSetDefaultInformation/AdvancedConfiguration = 'true'">
+        <tr>
+          <td>
+            Type configuratie:
+          </td>
+          <td>
+            Aangepast
+          </td>
+        </tr>
+      </xsl:if>
+    </table>
+
+    <!-- Software overview -->
+    <table>
+      <tr>
+        <td HEIGHT ="25"></td>
+      </tr>
+      <td WIDTH="300">
+        <h4>Geinstaleerde Software</h4>
+      </td>
+<!--
+      <tr>
+        <xsl:if test="ConfigClass/ConfInstalledSoftware/PcAnywhere = 'true'">
+          <tr>
+            <td>
+              Pc AnyWhere:
+            </td>
+            <td>
+              Geinstalleerd
+            </td>
+          </tr>
+        </xsl:if>
+        <xsl:if test="ConfigClass/ConfInstalledSoftware/PcAnywhere = 'false'">
+          <tr>
+            <td>
+              Pc AnyWhere:
+            </td>
+            <td>
+              Niet geinstalleerd
+            </td>
+          </tr>
+        </xsl:if>
+      </tr>
+      <tr>
+        <xsl:if test="ConfigClass/ConfInstalledSoftware/BlockKeys = 'true'">
+          <tr>
+            <td>
+              BlockKeys
+            </td>
+            <td>
+              Geinstalleerd
+            </td>
+          </tr>
+        </xsl:if>
+        <xsl:if test="ConfigClass/ConfInstalledSoftware/BlockKeys = 'false'">
+          <tr>
+            <td>
+              BlockKeys
+            </td>
+            <td>
+              Niet geinstalleerd
+            </td>
+          </tr>
+        </xsl:if>
+      </tr>
+      <tr>
+        <xsl:if test="ConfigClass/ConfInstalledSoftware/SQLServer = 'true'">
+          <tr>
+            <td>
+              Microsoft SQL server:
+            </td>
+            <td>
+              Geinstalleerd
+            </td>
+          </tr>
+        </xsl:if>
+        <xsl:if test="ConfigClass/ConfInstalledSoftware/SQLServer = 'false'">
+          <tr>
+            <td>
+              Microsoft SQL server:
+            </td>
+            <td>
+              Niet geinstalleerd
+            </td>
+          </tr>
+        </xsl:if>
+      </tr>
+      <tr>
+        <xsl:if test="ConfigClass/ConfInstalledSoftware/IIS = 'true'">
+          <tr>
+            <td>
+              Internet Information Services:
+            </td>
+            <td>
+              Geinstalleerd
+            </td>
+          </tr>
+        </xsl:if>
+        <xsl:if test="ConfigClass/ConfInstalledSoftware/IIS = 'false'">
+          <tr>
+            <td>
+              Internet Information Services:
+            </td>
+            <td>
+              Niet geinstalleerd
+            </td>
+          </tr>
+        </xsl:if>
+      </tr>-->
+      <tr>
+        <xsl:if test="ConfigClass/ConfInstalledSoftware/MBSA = 'true'">
+          <tr>
+            <td>
+              Microsoft Baseline Security Analyzer:
+            </td>
+            <td>
+              Geinstalleerd
+            </td>
+          </tr>
+        </xsl:if>
+        <xsl:if test="ConfigClass/ConfInstalledSoftware/MBSA = 'false'">
+          <tr>
+            <td>
+              Microsoft Baseline Security Analyzer:
+            </td>
+            <td>
+              Niet geinstalleerd
+            </td>
+          </tr>
+        </xsl:if>
+      </tr>
+
+    </table>
+
+    <!-- Password policy -->
+    <table>
+      <tr>
+        <td HEIGHT ="25"></td>
+      </tr>
+      <tr>
+        <td WIDTH="300">
+          <h4>Wachtwoord Beleid</h4>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Maximale wachtwoord duur:
+        </td>
+        <td>
+          <xsl:value-of select="ConfigClass/ConfSetPasswordPolicy/MaximumPasswordAge"/>
+        </td>
+        <td>dagen</td>
+      </tr>
+      <tr>
+        <td>
+          Minimale wachtwoord duur:
+        </td>
+        <td>
+          <xsl:value-of select="ConfigClass/ConfSetPasswordPolicy/MinimumPasswordAge"/>
+        </td>
+        <td>dagen</td>
+      </tr>
+      <tr>
+        <td>
+          Minimale wachtwoord lengte:
+        </td>
+        <td>
+          <xsl:value-of select="ConfigClass/ConfSetPasswordPolicy/MinimumPasswordLength"/>
+        </td>
+        <td>tekens</td>
+      </tr>
+      <tr>
+        <td>
+          Aantal laatst gebruikte wachtwoorden onthouden:
+        </td>
+        <td>
+          <xsl:value-of select="ConfigClass/ConfSetPasswordPolicy/PasswordHistorySize"/>
+        </td>
+        <td>wachtwoorden</td>
+      </tr>
+      <tr>
+        <td>
+          Voldoen aan complexciteits eisen:
+        </td>
+        <td></td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetPasswordPolicy/PasswordComplexity = '0'">Uitgeschakeld</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetPasswordPolicy/PasswordComplexity = '1'">Ingeschakeld</xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Opslaan met omkeerbare codering:
+        </td>
+        <td></td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetPasswordPolicy/ClearTextPassword = '0'">Uitgeschakeld</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetPasswordPolicy/ClearTextPassword = '1'">Ingeschakeld</xsl:if>
+        </td>
+      </tr>
+
+    </table>
+
+    <!-- Audit policy -->
+    <table>
+      <tr>
+        <td HEIGHT ="25"></td>
+      </tr>
+      <tr>
+        <td WIDTH="300">
+          <h4>Controle Beleid</h4>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Aanmeldingsgebeurtenissen:
+
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditLogonEvents = '0'">Geen controle</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditLogonEvents = '1'">Geslaagde</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditLogonEvents = '2'">Mislukte</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditLogonEvents = '3'">Geslaagde, Mislukte</xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Accountaanmeldingsgegevens:
+
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditAccountLogon = '0'">Geen controle</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditAccountLogon = '1'">Geslaagde</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditAccountLogon = '3'">Geslaagde, Mislukte</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditAccountLogon = '2'">Mislukte</xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Accountbeheer:
+
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditAccountManage = '0'">Geen controle</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditAccountManage = '1'">Geslaagde</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditAccountManage = '3'">Geslaagde, Mislukte</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditAccountManage = '2'">Mislukte</xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Active Directory-toegang:
+
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditDSAccess = '0'">Geen controle</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditDSAccess = '1'">Geslaagde</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditDSAccess = '3'">Geslaagde, Mislukte</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditDSAccess = '2'">Mislukte</xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Beleidswijzigingen:
+
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditPolicyChange = '0'">Geen controle</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditPolicyChange = '1'">Geslaagde</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditPolicyChange = '3'">Geslaagde, Mislukte</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditPolicyChange = '2'">Mislukte</xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Gebruik van bevoegdheden:
+
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditPrivilegeUse = '0'">Geen controle</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditPrivilegeUse = '1'">Geslaagde</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditPrivilegeUse = '3'">Geslaagde, Mislukte</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditPrivilegeUse = '2'">Mislukte</xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Objecttoegang:
+
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditObjectAccess = '0'">Geen controle</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditObjectAccess = '1'">Geslaagde</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditObjectAccess = '3'">Geslaagde, Mislukte</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditObjectAccess = '2'">Mislukte</xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Procesopsporing:
+
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditProcessTracking = '0'">Geen controle</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditProcessTracking = '1'">Geslaagde</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditProcessTracking = '3'">Geslaagde, Mislukte</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditProcessTracking = '2'">Mislukte</xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Systeemgebeurtenissen:
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditSystemEvents = '0'">Geen controle</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditSystemEvents = '1'">Geslaagde</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditSystemEvents = '3'">Geslaagde, Mislukte</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetAuditPolicy/AuditSystemEvents = '2'">Mislukte</xsl:if>
+        </td>
+      </tr>
+    </table>
+    <xsl:choose>
+      <xsl:when test="ConfigClass/ConfSetAuditPolicy/NoDefaultSettingsLog != ''">
+        <table>
+          <tr>
+            <td>
+              <b>Gekozen instellingen die afwijken van de standaard configuratie:</b>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td WIDTH="300">
+              <b>Instelling</b>
+            </td>
+            <td>
+              <b>Reden:</b>
+            </td>
+          </tr>
+          <xsl:for-each select="ConfigClass/ConfSetAuditPolicy/NoDefaultSettingsLog/NoDefaultSettingsLog">
+            <tr>
+              <td>
+                <xsl:value-of select="Setting"/>
+              </td>
+              <td>
+                <xsl:value-of select="Comment"/>
+              </td>
+            </tr>
+
+          </xsl:for-each>
+
+        </table>
+      </xsl:when>
+    </xsl:choose>
+
+    <!-- new usergroups -->
+    <table>
+      <xsl:choose>
+        <xsl:when test="ConfigClass/ConfSetWindowsUsergroup/NewUserGroups/UserGroup != ''">
+          <tr>
+            <td HEIGHT ="25"></td>
+          </tr>
+          <br />
+          <tr>
+            <td WIDTH="300">
+              <h4>De volgende gebruikersgroepen worden aangemaakt</h4>
+            </td>
+
+          </tr>
+          <xsl:for-each select="ConfigClass/ConfSetWindowsUsergroup/NewUserGroups/UserGroup">
+            <tr>
+              <td HEIGHT ="15"></td>
+            </tr>
+            <tr>
+              <td>
+                <b>Naam:</b>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <xsl:value-of select="Name"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <b>Omschrijving:</b>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <xsl:value-of select="Description"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+            </tr>
+          </xsl:for-each>
+        </xsl:when>
+      </xsl:choose>
+    </table>
+
+    <!-- deleted usergroups -->
+    <table>
+      <xsl:choose>
+        <xsl:when test="ConfigClass/ConfSetWindowsUsergroup/DeletedUserGroups/UserGroup != ''">
+          <tr>
+            <td HEIGHT ="25"></td>
+          </tr>
+          <br />
+          <tr>
+            <td WIDTH="300">
+              <h4>De volgende gebruikersgroepen worden verwijderd</h4>
+            </td>
+
+          </tr>
+          <xsl:for-each select="ConfigClass/ConfSetWindowsUsergroup/DeletedUserGroups/UserGroup">
+            <tr>
+              <td HEIGHT ="15"></td>
+            </tr>
+            <tr>
+              <td>
+                <b>Naam:</b>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <xsl:value-of select="Name"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <b>Omschrijving:</b>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <xsl:value-of select="Description"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+            </tr>
+          </xsl:for-each>
+        </xsl:when>
+      </xsl:choose>
+    </table>
+
+    <!-- new users -->
+    <table>
+      <xsl:choose>
+        <xsl:when test="ConfigClass/ConfSetWindowsUsers/NewUsers != ''">
+          <tr>
+            <td HEIGHT ="25"></td>
+          </tr>
+          <br />
+          <tr>
+            <td WIDTH="300">
+              <H4>De volgende gebruikers worden aangemaakt</H4>
+            </td>
+
+          </tr>
+          <xsl:for-each select="ConfigClass/ConfSetWindowsUsers/NewUsers/NewUser">
+            <tr>
+              <td HEIGHT ="15"></td>
+            </tr>
+            <tr>
+              <td>
+                <b>
+                  <xsl:value-of select="Name"/>
+                </b>
+              </td>
+              <td>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Volledige naam:
+              </td>
+              <td>
+                <xsl:value-of select="Fullname"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Omschrijving:
+              </td>
+              <td>
+                <xsl:value-of select="Description"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Groep:
+              </td>
+              <td>
+                <xsl:value-of select="UserGroup"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Wachtwoord word gewijzigd bij de volgende inlog poging:
+              </td>
+              <td>
+                <xsl:value-of select="ChangePwNextLogon"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Wachtwoord kan niet veranderd worden:
+              </td>
+              <td>
+                <xsl:value-of select="PasswordCantBeChanged"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Wachtwoord Verloopt nooit:
+              </td>
+              <td>
+                <xsl:value-of select="PasswordNeverExpires"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Account is Geblokeerd:
+              </td>
+              <td>
+                <xsl:value-of select="AccountDisabled"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Wachtwoord:
+              </td>
+              <td>
+                <xsl:value-of select="Password"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+            </tr>
+          </xsl:for-each>
+        </xsl:when>
+      </xsl:choose>
+    </table>
+
+    <!-- modyfied users -->
+    <table>
+      <xsl:choose>
+        <xsl:when test="ConfigClass/ConfSetWindowsUsers/ModifiedUsers != ''">
+          <tr>
+            <td HEIGHT ="25"></td>
+          </tr>
+          <br />
+          <tr>
+            <td WIDTH="300">
+              <H4>De volgende gebruikers worden aangepast</H4>
+            </td>
+          </tr>
+          <xsl:for-each select="ConfigClass/ConfSetWindowsUsers/ModifiedUsers/ModfiedUser">
+            <tr>
+              <td HEIGHT ="15"></td>
+            </tr>
+            <tr>
+              <td>
+                <b>
+                  <xsl:value-of select="Name"/>
+                </b>
+              </td>
+              <td>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Volledige naam:
+              </td>
+              <td>
+                <xsl:value-of select="Fullname"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Omschrijving:
+              </td>
+              <td>
+                <xsl:value-of select="Description"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Wachtwoord word gewijzigd bij de volgende inlog poging:
+              </td>
+              <td>
+                <xsl:value-of select="ChangePwNextLogon"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Wachtwoord kan niet veranderd worden:
+              </td>
+              <td>
+                <xsl:value-of select="PasswordCantBeChanged"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Wachtwoord Verloopt nooit:
+              </td>
+              <td>
+                <xsl:value-of select="PasswordNeverExpires"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Account is Geblokeerd:
+              </td>
+              <td>
+                <xsl:value-of select="AccountDisabled"/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                Wachtwoord:
+              </td>
+              <xsl:choose>
+                <xsl:when test="Password = '-1'">
+                  <td>
+                    Wachtwoord verandert niet
+                  </td>
+                </xsl:when>
+                <xsl:otherwise>
+                  <td>
+                    <xsl:value-of select="Password"/>
+                  </td>
+                </xsl:otherwise>
+              </xsl:choose>
+            </tr>
+            <tr>
+              <td>
+              </td>
+              <td>
+              </td>
+            </tr>
+          </xsl:for-each>
+        </xsl:when>
+      </xsl:choose>
+    </table>
+
+    <!-- deleted users -->
+    <table>
+      <xsl:choose>
+        <xsl:when test="ConfigClass/ConfSetWindowsUsers/DeletedUsers != ''">
+          <tr>
+            <td HEIGHT ="25"></td>
+          </tr>
+          <tr>
+            <td WIDTH="300">
+              <H4>De volgende gebruikers worden verwijderd</H4>
+
+            </td>
+          </tr>
+
+
+          <xsl:for-each select="ConfigClass/ConfSetWindowsUsers/DeletedUsers/DeletedUser">
+            <tr>
+              <td >
+                <b>
+                  <xsl:value-of select="Name"/>
+                </b>
+              </td>
+              <td>
+              </td>
+            </tr>
+
+          </xsl:for-each>
+
+          <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+          </tr>
+        </xsl:when>
+      </xsl:choose>
+    </table>
+
+    <!-- AutoPlay -->
+    <table>
+      <tr>
+        <td HEIGHT ="25"></td>
+      </tr>
+      <tr>
+        <td WIDTH="300">
+          <h4>Autoplay instellingen</h4>
+        </td>
+      </tr>
+      <tr>
+        <xsl:if test="ConfigClass/ConfSetAutoPlaySettings/AutoPlayOff = 'true'">
+          <td>
+            AutoPlay uitgeschakeld voor:
+          </td>
+          <td>
+            <xsl:if test="ConfigClass/ConfSetAutoPlaySettings/AutoPlaySetting = '1'">All drives</xsl:if>
+            <xsl:if test="ConfigClass/ConfSetAutoPlaySettings/AutoPlaySetting = '0'">CD-ROM and removable media drives</xsl:if>
+
+          </td>
+        </xsl:if>
+
+        <xsl:if test="ConfigClass/ConfSetAutoPlaySettings/AutoPlayOff = 'false'">
+          <td>
+            AutoPlay ingeschakeld
+          </td>
+          <td>
+
+          </td>
+        </xsl:if>
+
+      </tr>
+    </table>
+    <xsl:choose>
+      <xsl:when test="ConfigClass/ConfSetAutoPlaySettings/NoDefaultSettingsLog != ''">
+        <table>
+          <tr>
+            <td>
+              <b>Gekozen instellingen die afwijken van de standaard configuratie:</b>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td WIDTH="300">
+              <b>Instelling</b>
+            </td>
+            <td>
+              <b>Reden:</b>
+            </td>
+          </tr>
+          <xsl:for-each select="ConfigClass/ConfSetAutoPlaySettings/NoDefaultSettingsLog/NoDefaultSettingsLog">
+            <tr>
+              <td>
+                <xsl:value-of select="Setting"/>
+              </td>
+              <td>
+                <xsl:value-of select="Comment"/>
+              </td>
+            </tr>
+
+          </xsl:for-each>
+
+        </table>
+      </xsl:when>
+    </xsl:choose>
+
+    <!-- Explorer Settings -->
+    <table>
+      <tr>
+        <td HEIGHT ="25"></td>
+      </tr>
+      <tr>
+        <td WIDTH="300">
+
+          <h4>Windows explorer mapopties</h4>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Automatisch naar netwerkmappen en -printers zoeken:
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/AutomaticallySearchNetworkFoldersAndPrinters = 'true'">
+            Aan
+          </xsl:if>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/AutomaticallySearchNetworkFoldersAndPrinters = 'false'">
+            Uit
+          </xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          De inhoud van de systeemmappen weergeven:
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/DisplayContentOfSystemFolder = 'true'">
+            Aan
+          </xsl:if>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/DisplayContentOfSystemFolder = 'false'">
+            Uit
+          </xsl:if>
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Het volledige pad in de adresbalk weergeven:
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/DisplayFullPathInAddressBar = 'true'">
+            Aan
+          </xsl:if>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/DisplayFullPathInAddressBar = 'false'">
+            Uit
+          </xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Verborgen bestanden en mappen weergeven:
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/ShowHiddenFolders = 'true'">
+            Aan
+          </xsl:if>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/ShowHiddenFolders = 'false'">
+            Uit
+          </xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Extensies voor bekende bestandstypen verbergen:
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/HideExtensions = 'true'">
+            Aan
+          </xsl:if>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/HideExtensions = 'false'">
+            Uit
+          </xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Beveiligde besturingssysteembestanden verbergen:
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/HideProtectedOSFiles = 'true'">
+            Aan
+          </xsl:if>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/HideProtectedOSFiles = 'false'">
+            Uit
+          </xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          De weergave-instellingen van elke map opslaan:
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/RememberEachFoldersViewSetting = 'true'">
+            Aan
+          </xsl:if>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/RememberEachFoldersViewSetting = 'false'">
+            Uit
+          </xsl:if>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Gecodeerde of gecomprimeerde NTFS-bestanden in een andere kleur weergeven:
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/ShowNTFSFilesInColor = 'true'">
+            Aan
+          </xsl:if>
+          <xsl:if test="ConfigClass/ConfSetwindowsExplorerSettings/ShowNTFSFilesInColor = 'false'">
+            Uit
+          </xsl:if>
+        </td>
+      </tr>
+
+    </table>
+    <xsl:choose>
+      <xsl:when test="ConfigClass/ConfSetwindowsExplorerSettings/NoDefaultSettingsLog != ''">
+        <table>
+          <tr>
+            <td>
+              <b>Gekozen instellingen die afwijken van de standaard configuratie:</b>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td WIDTH="300">
+              <b>Instelling</b>
+            </td>
+          </tr>
+          <xsl:for-each select="ConfigClass/ConfSetwindowsExplorerSettings/NoDefaultSettingsLog/NoDefaultSettingsLog">
+            <tr>
+              <td>
+                <u>
+                  <xsl:value-of select="Setting"/>
+                </u>
+              </td>
+
+            </tr>
+            <tr>
+              <td>
+                Reden:
+                <xsl:value-of select="Comment"/>
+              </td>
+            </tr>
+
+          </xsl:for-each>
+
+        </table>
+      </xsl:when>
+    </xsl:choose>
+
+    <!-- Log in Shutdown -->
+    <table>
+      <tr>
+        <td HEIGHT ="25"></td>
+      </tr>
+      <tr>
+        <td WIDTH="300">
+          <h4>Log-in en shutdown instellingen</h4>
+        </td>
+      </tr>
+      <tr>
+        <xsl:if test="ConfigClass/ConfSetLoginShutdownSettings/AutologonInUse = 'true'">
+          <td>
+            Autologon ingeschakeld
+          </td>
+          <td>
+            <tr>
+              <td>
+                Inlognaam:
+              </td>
+              <td>
+                <xsl:value-of select="ConfigClass/ConfSetLoginShutdownSettings/UsernameAutoLogon"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Wachtwoord:
+              </td>
+              <td>
+                <xsl:value-of select="ConfigClass/ConfSetLoginShutdownSettings/PasswordAutoLogon"/>
+              </td>
+            </tr>
+          </td>
+        </xsl:if>
+        <xsl:if test="ConfigClass/ConfSetLoginShutdownSettings/AutologonInUse = 'false'">
+          <td>
+            Autologon uitgeschakeld
+          </td>
+          <td>
+
+          </td>
+        </xsl:if>
+
+      </tr>
+      <tr></tr>
+      <tr>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetLoginShutdownSettings/ShutDownEventTrackerInUse = 'true'">Shutdown event tracker ingeschakeld </xsl:if>
+          <xsl:if test="ConfigClass/ConfSetLoginShutdownSettings/ShutDownEventTrackerInUse = 'false'">Shutdown event tracker uitgeschakeld </xsl:if>
+        </td>
+      </tr>
+    </table>
+    <xsl:choose>
+      <xsl:when test="ConfigClass/ConfSetLoginShutdownSettings/NoDefaultSettingsLog != ''">
+        <table>
+          <tr>
+            <td>
+              <b>Gekozen instellingen die afwijken van de standaard configuratie:</b>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td WIDTH="300">
+              <b>Instelling</b>
+            </td>
+            <td>
+              <b>Reden:</b>
+            </td>
+          </tr>
+          <xsl:for-each select="ConfigClass/ConfSetLoginShutdownSettings/NoDefaultSettingsLog/NoDefaultSettingsLog">
+            <tr>
+              <td>
+                <xsl:value-of select="Setting"/>
+              </td>
+              <td>
+                <xsl:value-of select="Comment"/>
+              </td>
+            </tr>
+
+          </xsl:for-each>
+
+        </table>
+      </xsl:when>
+    </xsl:choose>
+
+    <!-- Remote Desktop -->
+    <table>
+      <tr>
+        <td HEIGHT ="25"></td>
+      </tr>
+      <tr>
+        <td WIDTH="300">
+          <h4>Remote desktop</h4>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetRemotedesktop/RemoteDesktopDisabled = 'true'">
+            Remotedesktop uitgeschakeld
+          </xsl:if>
+          <xsl:if test="ConfigClass/ConfSetRemotedesktop/RemoteDesktopEnabledForAllPCs = 'true'">
+            <xsl:if test="ConfigClass/ConfSetRemotedesktop/RemoteDesktopEnabledOnlyForPCsWithNLA = 'true'">
+              Remotedesktop ingeschakeld voor computers met "Remote desktop" met Netwerk level authentication. (veiliger)
+
+            </xsl:if>
+            <xsl:if test="ConfigClass/ConfSetRemotedesktop/RemoteDesktopEnabledOnlyForPCsWithNLA = 'false'">
+              Remotedesktop ingeschakeld voor computers met elke versie van "Extern bureaublad"
+              word toegestaan (minst veilig)
+            </xsl:if>
+          </xsl:if>
+        </td>
+      </tr>
+      <xsl:choose>
+        <xsl:when test="ConfigClass/ConfSetRemotedesktop/RemoteDesktopUsers != ''">
+          <tr>
+          </tr>
+          <tr>
+            <td>
+              <i>
+                <u>RemoteDesktopUsers: </u>
+              </i>
+            </td>
+          </tr>
+
+          <xsl:for-each select="ConfigClass/ConfSetRemotedesktop/RemoteDesktopUsers/RemoteDesktopUser">
+            <tr>
+              <td >
+                <xsl:value-of select="Name"/>
+              </td>
+
+            </tr>
+          </xsl:for-each>
+        </xsl:when>
+      </xsl:choose>
+    </table>
+    <xsl:choose>
+      <xsl:when test="ConfigClass/ConfSetRemotedesktop/NoDefaultSettingsLog != ''">
+
+        <table>
+          <tr>
+            <td>
+              <b>Gekozen instellingen die afwijken van de standaard configuratie:</b>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td WIDTH="300">
+              <b>Instelling</b>
+            </td>
+            <td>
+              <b>Reden:</b>
+            </td>
+          </tr>
+          <xsl:for-each select="ConfigClass/ConfSetRemotedesktop/NoDefaultSettingsLog/NoDefaultSettingsLog">
+            <tr>
+              <td>
+                <xsl:value-of select="Setting"/>
+              </td>
+              <td>
+                <xsl:value-of select="Comment"/>
+              </td>
+            </tr>
+
+          </xsl:for-each>
+
+        </table>
+      </xsl:when>
+    </xsl:choose>
+
+    <!-- Windows Firewall -->
+    <table>
+      <tr>
+        <td HEIGHT ="25"></td>
+      </tr>
+      <tr>
+        <td WIDTH="300">
+          <h4>Windows Firewall</h4>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Status Windows Firewall:
+        </td>
+        <td>
+          <xsl:if test="ConfigClass/ConfSetWindowsFirewall/FireWallOn = 'true'">Ingeschakeld</xsl:if>
+          <xsl:if test="ConfigClass/ConfSetWindowsFirewall/FireWallOn = 'false'">Uitgeschakeld</xsl:if>
+        </td>
+      </tr>
+    </table>
+    <xsl:choose>
+      <xsl:when test="ConfigClass/ConfSetWindowsFirewall/FireWallExceptions != ''">
+
+        <table>
+          <tr>
+            <td>
+              <b>Toegevoegde FireWall uitzonderingen:</b>
+            </td>
+          </tr>
+          <xsl:for-each select="ConfigClass/ConfSetWindowsFirewall/FireWallExceptions/FireWallException">
+            <tr>
+              <td>
+                <b>-</b>
+                <xsl:value-of select="ExceptionName"/>
+              </td>
+            </tr>
+
+          </xsl:for-each>
+        </table>
+      </xsl:when>
+    </xsl:choose>
+    <xsl:choose>
+      <xsl:when test="ConfigClass/ConfSetWindowsFirewall/NoDefaultSettingsLog != ''">
+        <table>
+          <tr>
+            <td>
+              <b>Gekozen instellingen die afwijken van de standaard configuratie:</b>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td WIDTH="300">
+              <b>Instelling</b>
+            </td>
+            <td>
+              <b>Reden:</b>
+            </td>
+          </tr>
+          <xsl:for-each select="ConfigClass/ConfSetWindowsFirewall/NoDefaultSettingsLog/NoDefaultSettingsLog">
+            <tr>
+              <td>
+                <xsl:value-of select="Setting"/>
+              </td>
+              <td>
+                <xsl:value-of select="Comment"/>
+              </td>
+            </tr>
+
+          </xsl:for-each>
+
+        </table>
+      </xsl:when>
+    </xsl:choose>
+
+    <!-- MBSA -->
+    <table>
+      <tr>
+        <td HEIGHT ="25"></td>
+      </tr>
+      <tr>
+        <td WIDTH="140">
+          <h4>MBSA instellingen</h4>
+        </td>
+      </tr>
+      <tr>
+        <xsl:if test="ConfigClass/ConfSetMicrosoftBaslineSecurityAnalyzer/RunMBSA = 'true'">
+          <tr>
+            <td>
+              MBSA ingeschakeld
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <xsl:value-of select="ConfigClass/ConfSetMicrosoftBaslineSecurityAnalyzer/PathMBSA"/>
+            </td>
+          </tr>
+        </xsl:if>
+        <xsl:if test="ConfigClass/ConfSetMicrosoftBaslineSecurityAnalyzer/RunMBSA = 'false'">
+          <td>
+            MBSA uitgeschakeld
+          </td>
+        </xsl:if>
+
+      </tr>
+
+    </table>
+    <xsl:choose>
+      <xsl:when test="ConfigClass/ConfSetMicrosoftBaslineSecurityAnalyzer/NoDefaultSettingsLog != ''">
+        <table>
+          <tr>
+            <td>
+              <b>Gekozen instellingen die afwijken van de standaard configuratie:</b>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td WIDTH="300">
+              <b>Instelling</b>
+            </td>
+            <td>
+              <b>Reden:</b>
+            </td>
+          </tr>
+          <xsl:for-each select="ConfigClass/ConfSetMicrosoftBaslineSecurityAnalyzer/NoDefaultSettingsLog/NoDefaultSettingsLog">
+            <tr>
+              <td>
+                <xsl:value-of select="Setting"/>
+              </td>
+              <td>
+                <xsl:value-of select="Comment"/>
+              </td>
+            </tr>
+
+          </xsl:for-each>
+
+        </table>
+      </xsl:when>
+    </xsl:choose>
+  
+    <!--Fouten Overzicht-->
+    <xsl:choose>
+      <xsl:when test="ConfigClass/ErrorList != ''">
+    <h2>Fouten Overzicht:</h2>
+
+    <table>
+      <tr>
+        <td></td>
+
+        <td WIDTH="300">
+          <b>Configuratie stap:</b>
+        </td>
+
+        <td>
+          <b>Fout bericht:</b>
+        </td>
+      </tr>
+      <xsl:for-each select="ConfigClass/ErrorList/ConfigErrors">
+
+        <tr>
+          <td>
+            <!-- <img src= "ConfigClass/@ErrorImageURL"/>-->
+          </td>
+          <td>
+            
+            <xsl:value-of select="ConfigError"/>
+          </td>
+          <td>
+            <xsl:value-of select="ErrorMessage"/>
+          </td>
+        </tr>
+
+      </xsl:for-each>
+    </table>
+    <table>
+      <tr>
+        <td>
+          <b>De gebruiker heeft bevestigd de fouten te hebben gelezen,</b>
+        </td>
+        </tr>
+      <tr>
+        <td>
+          <b>
+            Commentaar:
+          </b>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <xsl:value-of select="ConfigClass/ErrorOverviewComment"/>
+        </td>
+      </tr>
+    </table>
+      </xsl:when>
+    </xsl:choose>
+    
+    <!--MBSA Rapport-->
+    <xsl:choose>
+      <xsl:when test="ConfigClass/ConfSetMicrosoftBaslineSecurityAnalyzer/MBSAlogs != ''">
+        <h2>MBSA Rapport:</h2>
+         <table>
+               <xsl:for-each select="ConfigClass/ConfSetMicrosoftBaslineSecurityAnalyzer/MBSAlogs/MBSAlogItem">
+            <tr>
+              <td>
+                <xsl:value-of select="LogItem "/>
+              </td>
+            </tr>
+
+          </xsl:for-each>
+         </table>
+         <table>
+           <tr>
+             <td>
+               <b>De gebruiker heeft bevestigd het rapport te hebben gelezen,</b>
+             </td>
+           </tr>
+           <tr>
+             <td>
+               <b>
+                 Commentaar:
+               </b>
+             </td>
+           </tr>
+           <tr>
+             <td>
+               <xsl:value-of select="ConfigClass/ConfSetMicrosoftBaslineSecurityAnalyzer/MBSAoverviewComment"/>
+             </td>
+           </tr>
+         
+
+        </table>
+      </xsl:when>
+    </xsl:choose>
+    
+    <!--WhiteSpace-->
+    <table>
+    <tr>
+      <td HEIGHT ="25"></td>
+    </tr>
+    </table>
+  </body>
+  </html>
+</xsl:template>
+</xsl:stylesheet>

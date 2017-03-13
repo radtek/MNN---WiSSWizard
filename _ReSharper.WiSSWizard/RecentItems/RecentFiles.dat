@@ -1,0 +1,43 @@
+﻿<RecentFiles>
+  <RecentFiles>
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/f:app.manifest" caret="0" fromTop="0" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/f:EncryptionPassword.cs" caret="0" fromTop="0" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/f:CheckComboBox.cs" caret="1066" fromTop="39" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Pages/f:BaseWiSSWizardPage.cs" caret="865" fromTop="29" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Forms/f:FrmAddShare.cs" caret="1189" fromTop="23" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Forms/f:CheckCurrentSafety.cs" caret="0" fromTop="0" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Forms/f:ModifyUser.cs" caret="0" fromTop="0" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Forms/f:FrmAddWebServer.cs" caret="0" fromTop="0" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Handlers/f:WindowsFirewall.cs" caret="1775" fromTop="23" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/d:Resources/d:OS_ALL/f:addUserInMultipleGroups.ps1" caret="3033" fromTop="18" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/d:Resources/d:OS_ALL/f:AddRuleAdvFirewallProgram.ps1" caret="72" fromTop="1" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/f:ResourceHelper.cs" caret="1710" fromTop="15" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Handlers/f:ConfigClass.cs" caret="2934" fromTop="13" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/d:Resources/d:OS_ALL/f:addUser.ps1" caret="2669" fromTop="25" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/d:Resources/d:OS_ALL/f:addUser1.ps1" caret="706" fromTop="15" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/d:Resources/d:OS_ALL/f:addUserToGroup.ps1" caret="0" fromTop="0" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/d:Resources/d:OS_ALL/f:AllLocalUsersDescriptions.ps1" caret="0" fromTop="0" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/d:Resources/d:OS_ALL/f:checkAllLocalUsers1.ps1" caret="305" fromTop="7" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/d:Resources/d:OS_ALL/f:checkRegKeyExist.ps1" caret="83" fromTop="4" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/d:Resources/d:OS_ALL/f:Get-IIS7AllSiteStatus.ps1" caret="0" fromTop="0" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/d:Resources/d:OS_ALL/f:RemoveRegisterKey.ps1" caret="0" fromTop="0" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/d:Resources/d:OS_ALL/f:ShowCurrentWindowsExplorerSettings.ps1" caret="597" fromTop="7" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/d:Resources/d:OS_ALL/f:ShowCurrentPasswordPolicy.ps1" caret="657" fromTop="10" />
+    <File id="2912EA0A-FCEA-40C6-89CD-071E43407A41/d:Resources/d:OS_ALL/f:startIISServiceIfStopped.ps1" caret="167" fromTop="7" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Handlers/f:AuditPolicy.cs" caret="0" fromTop="0" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Handlers/f:InstalledSoftware.cs" caret="0" fromTop="0" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Handlers/f:Remotedesktop.cs" caret="0" fromTop="0" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Handlers/f:PasswordPolicy.cs" caret="1766" fromTop="0" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/f:ScriptHandling.cs" caret="50403" fromTop="28" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Pages/f:CtrlHome.cs" caret="657" fromTop="18" />
+  </RecentFiles>
+  <RecentEdits>
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Pages/f:BaseWiSSWizardPage.cs" caret="247753" fromTop="13" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/f:CheckComboBox.cs" caret="247753" fromTop="39" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Handlers/f:WindowsFirewall.cs" caret="100930" fromTop="23" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Handlers/f:PasswordPolicy.cs" caret="0" fromTop="0" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Forms/f:FrmAddShare.cs" caret="953" fromTop="11" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/f:ScriptHandling.cs" caret="2707" fromTop="18" />
+    <File id="FE5DDEF9-D723-4504-B3F0-819DD221D6E2/d:Pages/f:CtrlHome.cs" caret="103712" fromTop="23" />
+  </RecentEdits>
+</RecentFiles>

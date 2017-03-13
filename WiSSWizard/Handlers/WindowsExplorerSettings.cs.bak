@@ -1,0 +1,651 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Actemium.WiSSWizard.Support;
+
+namespace Actemium.WiSSWizard
+{
+    public class WindowsExplorerSettings
+    {
+        //parameters
+        private const string CLASSNAME = "WindowsExplorerSettings";
+        private List<bool> _checkWindowsExplorerFolderOptions = new List<bool>();
+
+        //constructor
+        public WindowsExplorerSettings()
+        {
+
+        }
+
+        //properties
+        public bool AutomaticallySearchNetworkFoldersAndPrinters
+        {
+            get
+            {
+                return _automaticallySearchNetworkFoldersAndPrinters;
+            }
+            set
+            {
+                _automaticallySearchNetworkFoldersAndPrinters = value;
+            }
+        } private bool _automaticallySearchNetworkFoldersAndPrinters = false;
+        public bool DisplayContentOfSystemFolder
+        {
+            get
+            {
+                return _displayContentOfSystemFolder;
+            }
+            set
+            {
+                _displayContentOfSystemFolder = value;
+            }
+        } private bool _displayContentOfSystemFolder = false;
+        public bool DisplayFullPathInAddressBar
+        {
+            get
+            {
+                return _displayFullPathInAddressBar;
+            }
+            set
+            {
+                _displayFullPathInAddressBar = value;
+            }
+        } private bool _displayFullPathInAddressBar = false;
+        public bool ShowHiddenFolders
+        {
+            get
+            {
+                return _showHiddenFolders;
+            }
+            set
+            {
+                _showHiddenFolders = value;
+            }
+        } private bool _showHiddenFolders = false;
+        public bool HideExtensions
+        {
+            get
+            {
+                return _hideExtensions;
+            }
+            set
+            {
+                _hideExtensions = value;
+            }
+        } private bool _hideExtensions = false;
+        public bool HideProtectedOSFiles
+        {
+            get
+            {
+                return _hideProtectedOSFiles;
+            }
+            set
+            {
+                _hideProtectedOSFiles = value;
+            }
+        } private bool _hideProtectedOSFiles = false;
+        public bool RememberEachFoldersViewSetting
+        {
+            get
+            {
+                return _rememberEachFoldersViewSetting;
+            }
+            set
+            {
+                _rememberEachFoldersViewSetting = value;
+            }
+        } private bool _rememberEachFoldersViewSetting = false;
+        public bool ShowNTFSFilesInColor
+        {
+            get
+            {
+                return _showNTFSFilesInColor;
+            }
+            set
+            {
+                _showNTFSFilesInColor = value;
+            }
+        } private bool _showNTFSFilesInColor = false;
+
+        public List<NoDefaultSettingsLog> NoDefaultSettingsLog
+        {
+            get
+            {
+                return _noDefaultSettingsLog;
+            }
+            set
+            {
+                _noDefaultSettingsLog = value;
+            }
+        } private List<NoDefaultSettingsLog> _noDefaultSettingsLog = new List<NoDefaultSettingsLog>();
+        public NoDefaultSettingsLog AddNoDefaultSettingsToList
+        {
+            set
+            {
+                NoDefaultSettingsLog newLog = value;
+                foreach (NoDefaultSettingsLog nds in _noDefaultSettingsLog)
+                {
+                    if (nds.Setting == newLog.Setting)
+                    {
+                        _noDefaultSettingsLog.Remove(nds);
+                        break;
+                    }
+                }
+                _noDefaultSettingsLog.Add(newLog);
+            }
+        }
+
+        //methods
+        public void SetExplorerMapOptions(OSVersions os,ConfigClass configClass)
+        {
+            try
+            {
+                string regPath = "";
+                string regKey = "";
+                string value = "";
+                string propertyType = "DWORD";
+
+                #region Automatisch naar netwerkmappen en -printers zoeken
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMONoNetCrawling") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMONoNetCrawling");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMONoNetCrawling");
+                }
+
+                if (_automaticallySearchNetworkFoldersAndPrinters)
+                { value = "0"; }
+                else
+                { value = "1"; }
+                configClass.GetScriptHandling.SetRegisterKey(regPath, regKey, value, propertyType);
+                #endregion
+                #region De inhoud van de systeemmappen weergeven
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOWebViewBarricade") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOWebViewBarricade");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOWebViewBarricade");
+                }
+                if (_displayContentOfSystemFolder)
+                { value = "1"; }
+                else
+                { value = "0"; }
+                configClass.GetScriptHandling.SetRegisterKey(regPath, regKey, value, propertyType);
+
+
+                #endregion
+                #region Het volledige pad in de adresbalk weergeven
+                if (ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsCabinetState") != null)
+                {
+                    regPath = ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsCabinetState");
+                }
+                else
+                {
+                    regPath = ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsCabinetState");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOFullPathAddress") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOFullPathAddress");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOFullPathAddress");
+                }
+                if (_displayFullPathInAddressBar)
+                { value = "1"; }
+                else
+                { value = "0"; }
+                configClass.GetScriptHandling.SetRegisterKey(regPath, regKey, value, propertyType);
+                #endregion
+                #region Verborgen bestanden en mappen weergeven
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOHidden") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOHidden");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOHidden");
+                }
+                if (_showHiddenFolders)
+                { value = "1"; }
+                else
+                { value = "2"; }
+                configClass.GetScriptHandling.SetRegisterKey(regPath, regKey, value, propertyType);
+
+
+                #endregion
+                #region Extensies voor bekende bestandstypen verbergen
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOHideFileExt") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOHideFileExt");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOHideFileExt");
+                }
+                if (_hideExtensions)
+                { value = "1"; }
+                else
+                { value = "0"; }
+                configClass.GetScriptHandling.SetRegisterKey(regPath, regKey, value, propertyType);
+
+                #endregion
+                #region Beveiligde besturingssysteembestanden verbergen
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOShowSuperHidden") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOShowSuperHidden");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOShowSuperHidden");
+                }
+                if (_hideProtectedOSFiles)
+                { value = "0"; }
+                else
+                { value = "1"; }
+                configClass.GetScriptHandling.SetRegisterKey(regPath, regKey, value, propertyType);
+                #endregion
+                #region De weergave-instellingen van elke map opslaan
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOClassicViewState") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOClassicViewState");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOClassicViewState");
+                }
+                if (_rememberEachFoldersViewSetting)
+                { value = "0"; }
+                else
+                { value = "1"; }
+                configClass.GetScriptHandling.SetRegisterKey(regPath, regKey, value, propertyType);
+                #endregion
+                #region Gecodeerde of gecomprimeerde NTFS-bestanden in een andere kleur weergeven
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOShowCompColor") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOShowCompColor");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOShowCompColor");
+                }
+                if (_showNTFSFilesInColor)
+                { value = "1"; }
+                else
+                { value = "0"; }
+                configClass.GetScriptHandling.SetRegisterKey(regPath, regKey, value, propertyType);
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Set Windows explorer folder options", CLASSNAME, ex);
+                configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Set Windows explorer folder options", ex.Message));
+
+            }
+        }
+        public bool CheckexplorerMapOptions(OSVersions os,ConfigClass configClass)
+        {
+            bool totalcheck = true;
+            try
+            {
+                string regPath = "";
+                string regKey = "";
+                string value = "";
+
+                _checkWindowsExplorerFolderOptions.Clear();
+
+                #region Automatisch naar netwerkmappen en -printers zoeken
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMONoNetCrawling") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMONoNetCrawling");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMONoNetCrawling");
+                }
+                if (_automaticallySearchNetworkFoldersAndPrinters)
+                { value = "0"; }
+                else
+                { value = "1"; }
+
+                if (configClass.GetScriptHandling.CheckRegKeyExist(regPath, regKey, value))
+                {
+                    _checkWindowsExplorerFolderOptions.Add(true);
+                }
+                else
+                {
+                    _checkWindowsExplorerFolderOptions.Add(false);
+                }
+
+
+                #endregion
+                #region De inhoud van de systeemmappen weergeven
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOWebViewBarricade") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOWebViewBarricade");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOWebViewBarricade");
+                }
+                if (_displayContentOfSystemFolder)
+                { value = "1"; }
+                else
+                { value = "0"; }
+
+                if (configClass.GetScriptHandling.CheckRegKeyExist(regPath, regKey, value))
+                {
+                    _checkWindowsExplorerFolderOptions.Add(true);
+                }
+                else
+                {
+                    _checkWindowsExplorerFolderOptions.Add(false);
+                }
+
+
+                #endregion
+                #region Het volledige pad in de adresbalk weergeven
+                if (ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsCabinetState") != null)
+                {
+                    regPath = ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsCabinetState");
+                }
+                else
+                {
+                    regPath = ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsCabinetState");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOFullPathAddress") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOFullPathAddress");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOFullPathAddress");
+                }
+                if (_displayFullPathInAddressBar)
+                { value = "1"; }
+                else
+                { value = "0"; }
+
+                if (configClass.GetScriptHandling.CheckRegKeyExist(regPath, regKey, value))
+                {
+                    _checkWindowsExplorerFolderOptions.Add(true);
+                }
+                else
+                {
+                    _checkWindowsExplorerFolderOptions.Add(false);
+                }
+
+                #endregion
+                #region Verborgen bestanden en mappen weergeven
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOHidden") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOHidden");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOHidden");
+                }
+                if (_showHiddenFolders)
+                { value = "1"; }
+                else
+                { value = "2"; }
+
+                if (configClass.GetScriptHandling.CheckRegKeyExist(regPath, regKey, value))
+                {
+                    _checkWindowsExplorerFolderOptions.Add(true);
+                }
+                else
+                {
+                    _checkWindowsExplorerFolderOptions.Add(false);
+                }
+
+                #endregion
+                #region Extensies voor bekende bestandstypen verbergen
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOHideFileExt") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOHideFileExt");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOHideFileExt");
+                }
+                if (_hideExtensions)
+                { value = "1"; }
+                else
+                { value = "0"; }
+
+                if (configClass.GetScriptHandling.CheckRegKeyExist(regPath, regKey, value))
+                {
+                    _checkWindowsExplorerFolderOptions.Add(true);
+                }
+                else
+                {
+                    _checkWindowsExplorerFolderOptions.Add(false);
+                }
+                #endregion
+                #region Beveiligde besturingssysteembestanden verbergen
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOShowSuperHidden") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOShowSuperHidden");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOShowSuperHidden");
+                }
+                if (_hideProtectedOSFiles)
+                { value = "0"; }
+                else
+                { value = "1"; }
+
+                if (configClass.GetScriptHandling.CheckRegKeyExist(regPath, regKey, value))
+                {
+                    _checkWindowsExplorerFolderOptions.Add(true);
+                }
+                else
+                {
+                    _checkWindowsExplorerFolderOptions.Add(false);
+                }
+                #endregion
+                #region De weergave-instellingen van elke map opslaan
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOClassicViewState") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOClassicViewState");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOClassicViewState");
+                }
+                if (_rememberEachFoldersViewSetting)
+                { value = "0"; }
+                else
+                { value = "1"; }
+
+                if (configClass.GetScriptHandling.CheckRegKeyExist(regPath, regKey, value))
+                {
+                    _checkWindowsExplorerFolderOptions.Add(true);
+                }
+                else
+                {
+                    _checkWindowsExplorerFolderOptions.Add(false);
+                }
+
+                #endregion
+                #region Gecodeerde of gecomprimeerde NTFS-bestanden in een andere kleur weergeven
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced") != null)
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOregPathfolderOptionsAdvanced");
+                }
+                else
+                {
+                    regPath = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOregPathfolderOptionsAdvanced");
+                }
+
+                if (Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOShowCompColor") != null)
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, "EMOShowCompColor");
+                }
+                else
+                {
+                    regKey = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(OSVersions.AllOS, "EMOShowCompColor");
+                }
+                if (_showNTFSFilesInColor)
+                { value = "1"; }
+                else
+                { value = "0"; }
+
+                if (configClass.GetScriptHandling.CheckRegKeyExist(regPath, regKey, value))
+                {
+                    _checkWindowsExplorerFolderOptions.Add(true);
+                }
+                else
+                {
+                    _checkWindowsExplorerFolderOptions.Add(false);
+                }
+                #endregion
+
+
+                foreach (bool b in _checkWindowsExplorerFolderOptions)
+                {
+                    if (!b)
+                    {
+                        totalcheck = false;
+                        return totalcheck;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Set Windows explorer folder options", CLASSNAME, ex);
+                configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Set Windows explorer folder options", ex.Message));
+
+            }
+           
+            return totalcheck;
+        }
+    }
+}

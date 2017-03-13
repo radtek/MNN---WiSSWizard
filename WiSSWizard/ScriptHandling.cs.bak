@@ -1,0 +1,1267 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections.ObjectModel;
+using System.Management.Automation;
+using System.Management.Automation.Runspaces;
+using Actemium.WiSSWizard.Support;
+using System.IO;
+using System.Windows.Forms;
+using System.DirectoryServices.AccountManagement;
+using System.Xml.Serialization;
+
+namespace Actemium.WiSSWizard
+{
+    public class ScriptHandling
+    {
+        const string CLASSNAME = "ScriptHandling";
+        private List<UserGroup> _allLocalGroups = new List<UserGroup>();
+        private List<ExistedUser> _allLocalUsers = new List<ExistedUser>();
+        private List<string> _allLocalUserInfo = new List<string>();
+        private List<string> _allLocalFireWallExceptions = new List<string>();
+        private List<string> _allFireWallUsingPorts = new List<string>();
+        private List<string> _membersOfRemoteDesktop = new List<string>();
+        private List<string> _membersOfAdministrators = new List<string>();
+        private FileStream _fileStream = null;
+        private StreamWriter _streamWriter = null;
+        private List<string> _registrySettings = new List<string>();
+        private ConfigClass _configClass;
+        private bool triedOnceturnOnSystemRestore = false;
+
+        public ScriptHandling()
+        {
+            CreateTempPSfile(OSVersions.AllOS, "");
+        }
+        public ScriptHandling(ConfigClass configClass)
+        {
+            _configClass = configClass;
+            CreateTempPSfile(OSVersions.AllOS, "");
+        }
+
+        public void CreateTempPSfile(OSVersions os, string script)
+        {
+            Directory.SetCurrentDirectory(System.IO.Path.GetDirectoryName(Application.ExecutablePath));
+            string directoryString = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\Temp";
+            string path = "";
+
+            try
+            {
+                DirectoryInfo di = Directory.CreateDirectory(directoryString);
+                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+
+                if (script != "")
+                {
+                    path = directoryString + @"\temp.ps1";
+                    File.Delete(path);
+                    try
+                    {
+                        using (_fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write))
+                        {
+                            using (_streamWriter = new StreamWriter(_fileStream))
+                            {
+                                String command = Actemium.WiSSWizard.Support.ResourceHelper.GetOSOperations(os, script);
+                                _streamWriter.WriteLine(command);
+                            }
+                        }
+                    }
+                    catch (IOException ex)
+                    {
+                        Actemium.Diagnostics.Trace.WriteError("({0})", "CreateTempPSfile", CLASSNAME, ex, script);
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Create temporary  PowerShell scriptfile", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Create temporary  PowerShell scriptfile", ex.Message));
+
+            }
+        }
+
+        public List<string> GetWindowsRestorePoints()
+        {
+            List<string> restorePoints = new List<string>();
+            try
+            {
+                using (Runspace runspace = RunspaceFactory.CreateRunspace())//;
+                {
+
+                    runspace.Open();
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("get-computerrestorepoint | format-table SequenceNumber, Description -auto");
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    foreach (PSObject str in results)
+                    {
+                        stringBuilder.AppendLine(str.ToString());
+                        string all = stringBuilder.ToString();
+                        string[] split = all.Split('\n');
+                        string st = "";
+                        foreach (string item in split)
+                        {
+                            st = item.Trim(new char[] { '\t', ' ', '\r', '\n' });
+                            restorePoints.Add(st);
+                        }
+                    }
+                }
+            }
+            catch (MethodInvocationException ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "GetWindowsRestorePoints", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Get Windows Restore Points", ex.Message));
+
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "GetWindowsRestorePoints", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Get Windows Restore Points", ex.Message));
+
+            }
+            return restorePoints;
+
+        }
+        public void CreateWindowsRestorePoint(string description)
+        {
+
+            try
+            {
+                using (Runspace runspace = RunspaceFactory.CreateRunspace())
+                {
+                    runspace.Open();
+                    try
+                    {
+                        Pipeline pipeline = runspace.CreatePipeline();
+                        
+                        
+                        pipeline.Commands.AddScript("checkpoint-computer -description \"" + description + "\"");
+                        pipeline.Commands.Add("Out-String");
+
+                        // execute the script
+                        Collection<PSObject> results = pipeline.Invoke();
+                    }
+                    catch (MethodInvocationException ex)
+                    {
+                        Actemium.Diagnostics.Trace.WriteError("({0})", "CreateWindowsRestorePoint", CLASSNAME, ex);
+                        _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Create Windows Restore Point", ex.Message));
+                    }
+                    catch (Exception ex)
+                    {
+                        Actemium.Diagnostics.Trace.WriteError("({0})", "CreateWindowsRestorePoint", CLASSNAME, ex);
+                        _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Create Windows Restore Point", ex.Message));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (!triedOnceturnOnSystemRestore)
+                {
+                    DialogResult result = MessageBox.Show("Windows systeemherstel is mogelijk uitgeschakeld\nAls u systeemherstel wenst, dient u deze eerst in te schakelen en probeer opnieuw", "Windows systeemherstel uitgeschakeld", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                    if (result == System.Windows.Forms.DialogResult.Retry)
+                    {
+                       triedOnceturnOnSystemRestore = true;
+                       CreateWindowsRestorePoint(description);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Restore Point niet mogelijk");
+                }
+
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Create Windows Restore Point", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Create Windows Restore Point", ex.Message));
+            }
+        }
+        public void RestoreSettings(string restorePointNr)
+        {
+            try
+            {
+                using (Runspace runspace = RunspaceFactory.CreateRunspace())//;
+                {
+                    runspace.Open();
+                    try
+                    {
+                        Pipeline pipeline = runspace.CreatePipeline();
+                        pipeline.Commands.AddScript("restore-computer -RestorePoint " + restorePointNr);
+                        pipeline.Commands.Add("Out-String");
+
+                        // execute the script
+                        Collection<PSObject> results = pipeline.Invoke();
+                    }
+                    catch (MethodInvocationException ex)
+                    {
+                        Actemium.Diagnostics.Trace.WriteError("({0})", "RestoreSettings", CLASSNAME, ex);
+                        _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Restore settings to latest Restore Point", ex.Message));
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Actemium.Diagnostics.Trace.WriteError("({0})", "RestoreSettings", CLASSNAME, ex);
+                        _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Restore settings to latest Restore Point", ex.Message));
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Restore settings to latest Restore Point", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Restore settings to latest Restore Point", ex.Message));
+            }
+        }
+
+        public bool RunINFfilePasswordAndControlPolicy(string infFile)
+        {
+            try
+            {
+                string command = "SECEDIT /configure /db secedit.sdb /cfg " + "\"" + infFile + "\"";
+                using (Runspace runspace = RunspaceFactory.CreateRunspace())
+                {
+                    runspace.Open();
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript(command);
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "RunINFfilePasswordAndControlPolicy", CLASSNAME, ex, infFile);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Run INFfile Password And ControlPolicy", ex.Message));
+
+                return false;
+            }
+        }
+
+        [XmlIgnoreAttribute()]
+        public List<UserGroup> GetAllLocalUsersGroups
+        {
+            get
+            {
+                return _allLocalGroups;
+            }
+        }
+        public void putAllLocalGroupsToList()
+        {
+            try
+            {
+                _allLocalGroups.Clear();
+                PrincipalContext insPrincipalContext = new PrincipalContext(ContextType.Machine);
+                GroupPrincipal insGroupPrincipal = new GroupPrincipal(insPrincipalContext);
+                insGroupPrincipal.Name = "*";
+                PrincipalSearcher insPrincipalSearcher = new PrincipalSearcher();
+                insPrincipalSearcher.QueryFilter = insGroupPrincipal;
+                PrincipalSearchResult<Principal> results = insPrincipalSearcher.FindAll();
+                if (insGroupPrincipal != null)
+                {
+                    foreach (Principal p in results)
+                    {
+                        UserGroup group = new UserGroup(p.Name, p.Description);
+                        _allLocalGroups.Add(group);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Put Local groups to list of local groups", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Put Local groups to list of local groups", ex.Message));
+
+            }
+        }
+        public void CreateUserGroups(string name, string discription)
+        {
+
+            try
+            {
+                using (Runspace runspace = RunspaceFactory.CreateRunspace())//;
+                {
+                    runspace.Open();
+                    CreateTempPSfile(OSVersions.AllOS, "addLocalGroup");
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                    pipeline.Commands.AddScript(".\\Temp\\temp.ps1 -localGroupName \"" + name + "\" -description \"" + discription + "\"");
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+
+                }
+            }
+            catch (MethodInvocationException ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0},{1})", "CreateUserGroups", CLASSNAME, ex, name, discription);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Create user group", ex.Message));
+
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0},{1})", "CreateUserGroups", CLASSNAME, ex, name, discription);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Create user group", ex.Message));
+            }
+
+        }
+        public void DeleteUserGroup(string UserGroupName)
+        {
+            try
+            {
+                using (Runspace runspace = RunspaceFactory.CreateRunspace())
+                {
+                    runspace.Open();
+                    CreateTempPSfile(OSVersions.AllOS, "DeleteUserGroup");
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                    string command = @".\Temp\temp.ps1 -localGroupName " + "\"" + UserGroupName + "\"";
+
+                    pipeline.Commands.AddScript(command);
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+                    runspace.Close();
+                };
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Delete usergroup", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Delete usergroup", ex.Message));
+            
+            }
+        }
+
+        [XmlIgnoreAttribute()]
+        public List<ExistedUser> GetAllLocalUsers
+        {
+            get
+            {
+                return _allLocalUsers;
+            }
+        }
+        public void putAllLocalUsersToList()
+        {
+            try
+            {
+                _allLocalUsers.Clear();
+                PrincipalContext PrincipalContext = new PrincipalContext(ContextType.Machine);
+                UserPrincipal userPrincipal = new UserPrincipal(PrincipalContext);
+                userPrincipal.Name = "*";
+                PrincipalSearcher principalSearcher = new PrincipalSearcher();
+                principalSearcher.QueryFilter = userPrincipal;
+                PrincipalSearchResult<Principal> results = principalSearcher.FindAll();
+                if (userPrincipal != null)
+                {
+                    foreach (Principal p in results)
+                    {
+                        ExistedUser user = new ExistedUser(p.Name, p.DisplayName, p.Description);
+                        _allLocalUsers.Add(user);
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Put local users to list", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Put local users to list", ex.Message));
+            
+            }
+
+
+        }
+
+        public void CreateUser(string name, string fullname, string description, string group, int ChangePwNextLogon, int PasswordCantBeChanged, int PasswordNeverExpires, int AccountDisabled, string Password)
+        {
+            try
+            {
+                using (Runspace runspace = RunspaceFactory.CreateRunspace())
+                {
+                    runspace.Open();
+                    string computer = "localhost";
+
+                    CreateTempPSfile(OSVersions.AllOS, "addUser");
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                    string command = @".\Temp\temp.ps1 -computer " + computer + " -user \"" + name + "\" -fullname \"" + fullname + "\" -description \"" + description + "\" -group \"" + group + "\" -password " + "\"" + Password + "\"" + " -CNL " + ChangePwNextLogon.ToString() + " -PCC " + PasswordCantBeChanged.ToString() + " -PNE " + PasswordNeverExpires.ToString() + " -AD " + AccountDisabled.ToString();
+
+                    pipeline.Commands.AddScript(command);
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+                    runspace.Close();
+                };
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Create local user", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Create local user", ex.Message));
+            
+            }
+
+        }
+        public bool CheckUserCreated(List<NewUser> newusers)
+        {
+            try
+            {
+                List<string> allLocalUserNames = new List<string>();
+                foreach (ExistedUser existedUser in _allLocalUsers)
+                {
+                    string name = existedUser.Name.TrimEnd(new[] { ' ' });
+                    allLocalUserNames.Add(name);
+                }
+                foreach (NewUser newUser in newusers)
+                {
+
+                    if (!allLocalUserNames.Contains(newUser.Name))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Check if user is created", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Check if user is created", ex.Message));
+                return false;
+            }
+
+
+        }   
+        public bool CheckUserDeleted(List<DeletedUser> deletedusers)
+        {
+            try
+            {
+                List<string> allLocalUserNames = new List<string>();
+                foreach (ExistedUser existedUser in _allLocalUsers)
+                {
+                    string name = existedUser.Name.TrimEnd(new[] { ' ' });
+                    allLocalUserNames.Add(name);
+                }
+                foreach (DeletedUser deletedUser in deletedusers)
+                {
+
+                    if (allLocalUserNames.Contains(deletedUser.Name))
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Check if user is deleted", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Check if user is deleted", ex.Message));
+                return false;            
+            }
+        }
+
+        public void ModifyUser(string username, string fullname, string description, bool ChangePwNextLogon, bool PasswordCantBeChanged, bool PasswordNeverExpires, bool AccountDisabled, string Password, bool ModifyOtherSettings)
+        {
+            try
+            {
+                bool go = true;
+                if (username == "Administrator")
+                {
+                    if (!CheckIfUserinGroupAdministratorsExist("Admin"))
+                    {
+                    go = false;
+                    putAllLocalUsersToList();
+                    foreach (ExistedUser user in _allLocalUsers)
+                    {
+                        if (user.Name == "Admin")
+                        {
+                            AddUserToGroup("Admin", "Administrators");
+                            
+                            putAllLocalGroupsToList();
+                            break;
+                            
+                        }
+                    }
+                   
+                        go = true;
+                   } 
+                }
+                if (go)
+                {
+                    string Username = username;
+                    string Description = description;
+
+                    string FullName = fullname;
+                    string newPassword = Password;
+
+                    string PasswordChangeAtNextLogon = " -PasswordChangeAtNextLogon";
+                    string CannotChangePassword = " -CannotChangePassword";
+                    string passwordNeverExpires = " -PasswordNeverExpires";
+                    string Disable = " -Disable";
+                    string ResetAllFlags = " -ResetAllFlags";
+                    //reset
+                    // gebruik eerst $CannotChangePassword (hiermee word PasswordChangeAtNextLogon mee uitgevinkt, wat niet gedaan kan worden door ResetAllFlags)	
+                    // vervolgens $ResetAllFlags
+                    string resetRole1 = @".\Temp\temp.ps1 -Username " + "\"" + Username + "\" " + CannotChangePassword;
+                    string resetRole2 = @".\Temp\temp.ps1 -Username " + "\"" + Username + "\" " + ResetAllFlags;
+                    string command = @".\Temp\temp.ps1 -Username " + "\"" + Username + "\"";
+
+                    if (fullname.Length != 0)
+                    {
+                        command += " -Fullname " + "\"" + FullName + "\"";
+                    }
+                    if (description.Length != 0)
+                    {
+                        command += " -Description " + "\"" + Description + "\"";
+                    }
+
+                    if (ModifyOtherSettings)
+                    {
+                        if (ChangePwNextLogon)
+                        {
+                            command += PasswordChangeAtNextLogon;
+                        }
+                        if (PasswordCantBeChanged)
+                        {
+                            command += CannotChangePassword;
+                        }
+                        if (PasswordNeverExpires)
+                        {
+                            command += passwordNeverExpires;
+                        }
+                        if (AccountDisabled)
+                        {
+                            command += Disable;
+                        }
+                    }
+                    if (Password != "-1")
+                    {
+                        command += " -newPassword " + "\"" + Password + "\"";
+                    }
+
+                    using (Runspace runspace = RunspaceFactory.CreateRunspace())
+                    {
+                        runspace.Open();
+                        CreateTempPSfile(OSVersions.AllOS, "modifyUser");
+                        Pipeline pipeline = runspace.CreatePipeline();
+                        pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                        pipeline.Commands.AddScript(resetRole1);
+                        pipeline.Commands.AddScript(resetRole2);
+                        pipeline.Commands.AddScript(command);
+                        pipeline.Commands.Add("Out-String");
+                        pipeline.Invoke();
+
+                        // execute the script
+                        //Collection<PSObject> results = 
+                        runspace.Close();
+                    };
+          
+                }
+                else
+                {
+                    string errorsetting = "ModfiedUser "+username;
+                    string errorMessage = "Can not change Administrator while Admin is not a member of Administrators";
+                    Actemium.Diagnostics.Trace.WriteError("({0})", errorsetting, CLASSNAME, errorMessage);
+                    _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, errorsetting, errorMessage));
+                }
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Modify user", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Modify user", ex.Message));
+            
+            }
+        }
+        public void DeleteUser(string UserName)
+        {
+            try
+            {
+                using (Runspace runspace = RunspaceFactory.CreateRunspace())
+                {
+                    runspace.Open();
+                    CreateTempPSfile(OSVersions.AllOS, "DeleteUser");
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                    string command = @".\Temp\temp.ps1 -UserName " + "\"" + UserName + "\"";
+
+                    pipeline.Commands.AddScript(command);
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+                    runspace.Close();
+                };
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Delete User", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Delete User", ex.Message));
+            
+            }
+        }
+
+        public void AddUserToGroup(string user, string Group)
+        {
+            bool isingroup = false;
+            foreach(string str in putMembersOfGroupToList(Group))
+            {
+            if(str == user)
+            {
+            isingroup = true;
+                break;
+            }
+            }
+            if(!isingroup)
+            {
+                using (Runspace runspace = RunspaceFactory.CreateRunspace())
+                {
+                    runspace.Open();
+                    try
+                    {
+                        CreateTempPSfile(OSVersions.AllOS, "addUserToGroup");
+                        Pipeline pipeline = runspace.CreatePipeline();
+                        pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                        string command = "";
+                        command = @".\Temp\temp.ps1 -name " + user + " -toGroup " + "\"" + Group + "\"";
+                        pipeline.Commands.AddScript(command);
+                        pipeline.Commands.Add("Out-String");
+
+                        // execute the script
+                            pipeline.Invoke();
+
+                    }
+                    catch (MethodInvocationException ex)
+                    {
+                        Actemium.Diagnostics.Trace.WriteError("({0})", "AddUserToGroup", CLASSNAME, ex);
+                        _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Add user to usergroup", ex.Message));
+            
+                    }
+                };
+            }
+            
+        }
+        public bool CheckIfUserinGroupExist(List<RemoteDesktopUser> membersOfGroup)
+        {
+            try
+            {
+                string language = System.Globalization.CultureInfo.CurrentCulture.DisplayName;
+                if (language.Contains("Nederland"))
+                {
+                    putMembersOfRemoteDesktopGroupToList("Externe bureaubladgebruikers");
+                }
+                else
+                {
+                    putMembersOfRemoteDesktopGroupToList("Remote Desktop Users");
+                }
+
+                bool check = true;
+                bool[] checkArray = new bool[membersOfGroup.Count];
+                int count = 0;
+
+                for (int i = 0; i < membersOfGroup.Count; i++)
+                {
+                    checkArray[i] = false;
+                }
+                foreach (RemoteDesktopUser str in membersOfGroup)
+                {
+
+                    for (int i = 0; i < _membersOfRemoteDesktop.Count; i++)
+                    {
+                        if (_membersOfRemoteDesktop[i] == str.Name)
+                        {
+                            checkArray[count] = true;
+                            count++;
+                            break;
+                        }
+                    }
+
+                }
+                foreach (bool b in checkArray)
+                {
+                    if (b == true)
+                    {
+                        check = true;
+                    }
+                    else
+                    {
+                        check = false;
+                        break;
+                    }
+                }
+                return check;
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Check if user in usergroup exist", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Check if user in usergroup exist", ex.Message));
+                return false;
+            }
+
+        }
+        public bool CheckIfUserinGroupAdministratorsExist(string User)
+        {
+            try
+            {
+                putMembersOfRemoteDesktopGroupToList("Administrators");
+
+                bool check = false;
+
+                foreach (string str in _membersOfAdministrators)
+                {
+
+                    if (str == User)
+                    {
+                        check = true;
+                        break;
+                    }
+                }
+
+                return check;
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Check if user contains in Administrator group", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Check if user contains in Administrator group", ex.Message));
+                return false;
+            }
+        }
+
+        public List<string> GetAllLocalFirewallExceptions
+        {
+            get
+            {
+                return _allLocalFireWallExceptions;
+            }
+        }
+        public void putAllLocalFireWallExceptionsToList()
+        {
+            _allLocalFireWallExceptions.Clear();
+            using (Runspace runspace = RunspaceFactory.CreateRunspace())
+            {
+                runspace.Open();
+
+                try
+                {
+                    CreateTempPSfile(OSVersions.AllOS, "firewallCheckException");
+
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+
+                    pipeline.Commands.AddScript(@".\Temp\temp.ps1");
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+                    StringBuilder stringBuilder = new StringBuilder();
+                    foreach (PSObject str in results)
+                    {
+                        stringBuilder.AppendLine(str.ToString());
+                        string all = stringBuilder.ToString();
+                        string[] split = all.Split('\n');
+                        string st = "";
+                        foreach (string item in split)
+                        {
+                            st = item.Trim(new char[] { '\t', ' ', '\r', '\n' });
+                            _allLocalFireWallExceptions.Add(st);
+                        }
+
+                    }
+                }
+                catch (MethodInvocationException ex)
+                {
+                    Actemium.Diagnostics.Trace.WriteError("({0})", "putAllLocalFireWallExceptionsToList", CLASSNAME, ex);
+                    _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "putAllLocalFireWallExceptionsToList", ex.Message));
+            
+                }
+            };
+        }
+        public List<string> GetAllLocalFirewallusingPorts()
+        {
+            _allFireWallUsingPorts.Clear();
+            using (Runspace runspace = RunspaceFactory.CreateRunspace())
+            {
+                runspace.Open();
+
+                try
+                {
+                    CreateTempPSfile(OSVersions.AllOS, "firewallCheckclosedPorts");
+
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+
+                    pipeline.Commands.AddScript(@".\Temp\temp.ps1");
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+                    StringBuilder stringBuilder = new StringBuilder();
+                    foreach (PSObject str in results)
+                    {
+                        stringBuilder.AppendLine(str.ToString());
+                        string all = stringBuilder.ToString();
+                        string[] split = all.Split('\n');
+                        string st = "";
+                        foreach (string item in split)
+                        {
+                            st = item.Trim(new char[] { '\t', ' ', '\r', '\n' });
+                            _allFireWallUsingPorts.Add(st);
+                        }
+
+                    }
+                    return _allFireWallUsingPorts;
+                }
+                catch (MethodInvocationException ex)
+                {
+                    Actemium.Diagnostics.Trace.WriteError("({0})", "putAllUsingPortsToList", CLASSNAME, ex);
+                    _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "get firewallports they are not free", ex.Message));
+            
+                    return null;
+                }
+            };
+        }
+        public void TurnOnOffFireWall(string OnOff)
+        {
+            using (Runspace runspace = RunspaceFactory.CreateRunspace())
+            {
+                runspace.Open();
+                try
+                {
+                    CreateTempPSfile(OSVersions.AllOS, "firewallTurnOnOff");
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+
+                    pipeline.Commands.AddScript(@".\Temp\temp.ps1 -OnOrOff " + OnOff);
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+
+                }
+                catch (MethodInvocationException ex)
+                {
+                    Actemium.Diagnostics.Trace.WriteError("({0})", "TurnOnOffFireWal", CLASSNAME, ex, OnOff);
+                    _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Turn on/off firewall", ex.Message));
+            
+                }
+            };
+
+        }
+        public void AddExeceptionFirewall(string program, string protocol, string port, string programPath, string pcAnywhere)
+        {
+            using (Runspace runspace = RunspaceFactory.CreateRunspace())
+            {
+                runspace.Open();
+                try
+                {
+                    CreateTempPSfile(OSVersions.AllOS, "firewallAddException");
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                    string command = @".\Temp\temp.ps1 -program " + "\"" + program + "\"" + " -protocol " + protocol + " -port " + port + " -programPath " + programPath + " -pcAnywhere " + pcAnywhere;
+                    pipeline.Commands.AddScript(command);
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+
+                }
+                catch (MethodInvocationException ex)
+                {
+                    Actemium.Diagnostics.Trace.WriteError("({0},{1},{2},{3},{4})", "AddExeceptionFirewall", CLASSNAME, ex, program, protocol, port, programPath, pcAnywhere);
+                    _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Add Firewall Exception", ex.Message));
+            
+                }
+            };
+        }
+        public List<string> putMembersOfGroupToList(string group)
+        {
+            List<string> membersOfgroup = new List<string>();
+            membersOfgroup.Clear();
+            using (Runspace runspace = RunspaceFactory.CreateRunspace())
+            {
+                runspace.Open();
+
+                try
+                {
+                    CreateTempPSfile(OSVersions.AllOS, "getListofUsersInGroup");
+
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                    string command = @".\Temp\temp.ps1 -Group " + "\"" + group + "\"";
+                    pipeline.Commands.AddScript(command);
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+                    StringBuilder stringBuilder = new StringBuilder();
+                    foreach (PSObject str in results)
+                    {
+                        stringBuilder.AppendLine(str.ToString());
+                        string all = stringBuilder.ToString();
+                        string[] split = all.Split('\n');
+                        string st = "";
+                        foreach (string item in split)
+                        {
+                            st = item.Trim(new char[] { '\t', ' ', '\r', '\n' });
+                            membersOfgroup.Add(st);
+                        }
+
+                    }
+                    
+                }
+                catch (MethodInvocationException ex)
+                {
+                    Actemium.Diagnostics.Trace.WriteError("({0})", "putMembersOfRemoteDesktopGroupToList", CLASSNAME, ex, group);
+                    _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "putMembersOfRemoteDesktopGroupToList", ex.Message));
+
+                }
+            };
+            return membersOfgroup;
+        }
+        public void putMembersOfRemoteDesktopGroupToList(string group)
+        {
+            _membersOfRemoteDesktop.Clear();
+            using (Runspace runspace = RunspaceFactory.CreateRunspace())
+            {
+                runspace.Open();
+
+                try
+                {
+                    CreateTempPSfile(OSVersions.AllOS, "getListofUsersInGroup");
+
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                    string command = @".\Temp\temp.ps1 -Group " + "\"" + group + "\"";
+                    pipeline.Commands.AddScript(command);
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+                    StringBuilder stringBuilder = new StringBuilder();
+                    foreach (PSObject str in results)
+                    {
+                        stringBuilder.AppendLine(str.ToString());
+                        string all = stringBuilder.ToString();
+                        string[] split = all.Split('\n');
+                        string st = "";
+                        foreach (string item in split)
+                        {
+                            st = item.Trim(new char[] { '\t', ' ', '\r', '\n' });
+                            _membersOfRemoteDesktop.Add(st);
+                        }
+
+                    }
+                }
+                catch (MethodInvocationException ex)
+                {
+                    Actemium.Diagnostics.Trace.WriteError("({0})", "putMembersOfRemoteDesktopGroupToList", CLASSNAME, ex, group);
+                    _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "putMembersOfRemoteDesktopGroupToList", ex.Message));
+            
+                }
+            };
+        }
+        public void putMembersOfAdministratorsToList(string group)
+        {
+            _membersOfAdministrators.Clear();
+            using (Runspace runspace = RunspaceFactory.CreateRunspace())
+            {
+                runspace.Open();
+
+                try
+                {
+                    CreateTempPSfile(OSVersions.AllOS, "getListofUsersInGroup");
+
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                    string command = @".\Temp\temp.ps1 -Group " + "\"" + group + "\"";
+                    pipeline.Commands.AddScript(command);
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+                    StringBuilder stringBuilder = new StringBuilder();
+                    foreach (PSObject str in results)
+                    {
+                        stringBuilder.AppendLine(str.ToString());
+                        string all = stringBuilder.ToString();
+                        string[] split = all.Split('\n');
+                        string st = "";
+                        foreach (string item in split)
+                        {
+                            st = item.Trim(new char[] { '\t', ' ', '\r', '\n' });
+                            _membersOfAdministrators.Add(st);
+                        }
+
+                    }
+                }
+                catch (MethodInvocationException ex)
+                {
+                    Actemium.Diagnostics.Trace.WriteError("({0})", "putMembersOfRemoteDesktopGroupToList", CLASSNAME, ex, group);
+                    _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "putMembersOfAdministratorsToList", ex.Message));
+            
+                }
+            };
+        }
+
+        public List<string> RegistrySettings
+        {
+            get
+            {
+                return _registrySettings;
+            }
+            set
+            {
+                _registrySettings = value;
+            }
+        }
+        public string GetRegkeyValue(string registerPath, string registerKey)
+        {
+            using (Runspace runspace = RunspaceFactory.CreateRunspace())
+            {
+                runspace.Open();
+                try
+                {
+                    if (registerKey.Length != 0)
+                    {
+                        CreateTempPSfile(OSVersions.AllOS, "GetRegisterKeyValue");
+                        Pipeline pipeline = runspace.CreatePipeline();
+                        pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                        string command = @".\Temp\temp.ps1 -RegisterPath "+"\"" + registerPath +"\""+ " -Keyname " + registerKey;
+                        pipeline.Commands.AddScript(command);
+                        pipeline.Commands.Add("Out-String");
+
+                        // execute the script
+                        Collection<PSObject> results = pipeline.Invoke();
+                        StringBuilder stringBuilder = new StringBuilder();
+
+                        foreach (PSObject str in results)
+                        {
+                            stringBuilder.AppendLine(str.ToString());
+                            string all = stringBuilder.ToString();
+                            string[] split = all.Split('\n');
+                            string st = "";
+                            string stringReturn = "";
+                            foreach (string item in split)
+                            {
+
+                                st = item.Trim(new char[] { '\t', ' ', '\r', '\n' });
+                                if (st.Contains("False"))
+                                {
+                                    return "NULL";
+                                }
+                                if (item.Contains(registerKey))
+                                {
+                                    string[] value = st.Split(':');
+                                    for (int i = 0; i < value.Length; i++)
+                                    {
+                                        if (i != 0)
+                                        {
+                                            if (i != value.Length - 1)
+                                            {
+                                                stringReturn = stringReturn + value[i] + ":";
+                                            }
+                                            else
+                                            {
+                                                stringReturn = stringReturn + value[i];
+                                            }
+                                        }
+                                    }
+                                    return stringReturn;
+                                }
+
+                            }
+
+                        }
+
+                    }
+                }
+                catch (MethodInvocationException ex)
+                {
+                    Actemium.Diagnostics.Trace.WriteError("({0},{1})", "GetRegkeyValue", CLASSNAME, ex, registerPath, registerKey);
+                    _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Get Reg Key value", ex.Message));
+            
+                }
+            };
+            return "";
+
+        }
+        public void SetRegisterKey(string registerPath, string registerKey, string value, string propertyType)
+        {
+            using (Runspace runspace = RunspaceFactory.CreateRunspace())
+            {
+                runspace.Open();
+                try
+                {
+                    if (registerPath.Contains(@"HKCU:\"))
+                    {
+                        string path = registerPath.Remove(0, 6);
+
+                        _registrySettings.Add(@"[HKEY_CURRENT_USER\" + path + "]");
+                        if (propertyType == "DWORD")
+                        {
+                            _registrySettings.Add("\"" + registerKey + "\"=dword:" + value);
+                        }
+                        else
+                        {
+                            _registrySettings.Add("\"" + registerKey + "\"=\"" + value + "\"");
+                        }
+                        _registrySettings.Add("");
+
+                    }
+
+                    CreateTempPSfile(OSVersions.AllOS, "SetRegisterKey");
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                    string command = "";
+                    command = @".\Temp\temp.ps1 -RegisterPath "+"\""+ registerPath +"\""+" -Keyname " + registerKey + " -Value \"" + value + "\" -PropertyType " + propertyType;
+                    pipeline.Commands.AddScript(command);
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    pipeline.Invoke();
+
+                }
+                catch (MethodInvocationException ex)
+                {
+                    Actemium.Diagnostics.Trace.WriteError("({0},{1},{2})", "SetRegisterKey", CLASSNAME, ex, registerPath, registerKey, propertyType);
+                    _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Set register key value", ex.Message));
+            
+                }
+            };
+        }
+        public bool CheckRegKeyExist(string registerPath, string registerKey, string value)
+        {
+            using (Runspace runspace = RunspaceFactory.CreateRunspace())
+            {
+                runspace.Open();
+
+                try
+                {
+                    CreateTempPSfile(OSVersions.AllOS, "checkRegKeyExist");
+
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                    string command = @".\Temp\temp.ps1 -RegisterPath "+"\"" + registerPath +"\""+" -Keyname " + registerKey + " -Value " +"\""+ value+"\"";
+                    pipeline.Commands.AddScript(command);
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+                    StringBuilder stringBuilder = new StringBuilder();
+                    foreach (PSObject str in results)
+                    {
+                        stringBuilder.AppendLine(str.ToString());
+                        string all = stringBuilder.ToString();
+                        string[] split = all.Split('\n');
+                        string st = "";
+                        foreach (string item in split)
+                        {
+                            st = item.Trim(new char[] { '\t', ' ', '\r', '\n' });
+                            if (item.Contains("True"))
+                            {
+                                return true;
+                            }
+                            else if (item.Contains("false"))
+                            {
+                                return false;
+                            }
+                        }
+
+                    }
+                }
+                catch (MethodInvocationException ex)
+                {
+                    Actemium.Diagnostics.Trace.WriteError("({0},{1},{2})", "CheckRegKeyExist", CLASSNAME, ex, registerPath, registerKey, value);
+                    _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Check if registry key exist", ex.Message));
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    Actemium.Diagnostics.Trace.WriteError("({0},{1},{2})", "CheckRegKeyExist", CLASSNAME, ex, registerPath, registerKey, value);
+                    _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Check if registry key exist", ex.Message));
+                    return false;
+                }
+            };
+
+            return false;
+
+        }
+        public void RemoveRegisterKey(string registerPath, string registerKey)
+        {
+            using (Runspace runspace = RunspaceFactory.CreateRunspace())
+            {
+                runspace.Open();
+                try
+                {
+                    if (registerKey.Length != 0)
+                    {
+                        CreateTempPSfile(OSVersions.AllOS, "RemoveRegisterKey");
+                        Pipeline pipeline = runspace.CreatePipeline();
+                        pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                        string command = @".\Temp\temp.ps1 -RegisterPath " + registerPath + " -Keyname " + registerKey;
+                        pipeline.Commands.AddScript(command);
+                        pipeline.Commands.Add("Out-String");
+
+                        // execute the script
+                        Collection<PSObject> results = pipeline.Invoke();
+                    }
+                }
+                catch (MethodInvocationException ex)
+                { 
+                    Actemium.Diagnostics.Trace.WriteError("({0},{1})", "RemoveRegisterKey", CLASSNAME, ex, registerPath, registerKey);
+                    _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Remove registry key", ex.Message));
+                }
+            };
+
+        }
+
+        public void AddRegistrySettingsToFile(string path)
+        {
+            try
+            {
+                File.Delete(path);
+                FileHandling fh = new FileHandling(_configClass);
+                fh.CreateRegFile(path);
+                fh.AddLineToEndFile(path, "Windows Registry Editor Version 5.00 ");
+                fh.AddLineToEndFile(path, "");
+                foreach (string str in _registrySettings)
+                {
+                    fh.AddLineToEndFile(path, str);
+                }
+            }
+            catch (Exception ex)
+            {
+                Actemium.Diagnostics.Trace.WriteError("({0})", "Add registrykey to .reg file", CLASSNAME, ex);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Add registrykey to .reg file", ex.Message));
+            
+            }
+        }
+        public void RunMBSA(string path, string mbsaLog)
+        {
+            using (Runspace runspace = RunspaceFactory.CreateRunspace())
+            {
+                runspace.Open();
+                try
+                {
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    pipeline.Commands.AddScript("Set-ExecutionPolicy RemoteSigned");
+                    string command1 = "cd \"" + path + "\"";
+                    string command2 = @".\mbsacli.exe /target localhost > " + mbsaLog;
+                    pipeline.Commands.AddScript(command1);
+                    pipeline.Commands.AddScript(command2);
+                    pipeline.Commands.Add("Out-String");
+
+                    // execute the script
+                    Collection<PSObject> results = pipeline.Invoke();
+                }
+                catch (MethodInvocationException ex)
+                { Actemium.Diagnostics.Trace.WriteError("({0},{1})", "RunMBSA", CLASSNAME, ex, path, mbsaLog);
+                _configClass.ErrorList.Add(new ConfigErrors(CLASSNAME, "Run MBSA", ex.Message));
+            
+                }
+
+            };
+        }
+    }
+}

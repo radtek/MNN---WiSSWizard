@@ -1,0 +1,1 @@
+get-wmiobject Win32_Share | sort Name | select Name, Path, Description

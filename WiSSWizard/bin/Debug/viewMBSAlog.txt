@@ -1,0 +1,563 @@
+
+Security assessment: Incomplete Scan
+Computer name: STARREN\PC0674
+IP address: 127.0.0.1
+Security report name: STARREN - PC0674 (2-5-2012 10-21)
+WSUS server: http://SV1010
+Scan date: 2-5-2012 10:21
+Scanned with MBSA version: 2.2.2170.0
+Catalog synchronization date:
+Security update catalog: Microsoft Update, Windows Server Update Services
+
+
+Security Updates Scan Results
+	
+	   Issue:  Developer Tools, Runtimes, and Redistributables Security Updates
+	   Score:  Check passed
+	   Result: No security updates are missing.
+
+		Current Update Compliance
+		
+			| MS09-062 | Installed | Security Update for Microsoft Visual Studio 2008 (KB972221) | Low |
+			| MS11-025 | Installed | Security Update for Microsoft Visual Studio 2010 Service Pack 1 (KB2565057) | Important |
+			| MS12-021 | Installed | Security Update for Microsoft Visual Studio 2010 Service Pack 1 (KB2645410) | Important |
+			| MS09-062 | Installed | Security Update for Report Viewer Redistributable 2008 (KB971118) | Critical |
+
+			| MS09-062 | Installed | Security Update for Report Viewer Redistributable 2008 Service Pack 1 (KB971119) | Critical |
+			| MS09-062 | Installed | Security Update for Microsoft Visual Studio 2008 Service Pack 1 (KB972222) | Low |
+			| MS11-025 | Installed | Security Update for Microsoft Visual C++ 2008 Service Pack 1 Redistributable Package (KB2538243) | Important |
+			| MS12-021 | Installed | Security Update for Microsoft Visual Studio 2008 Service Pack 1 (KB2669970) | Important |
+			| MS11-049 | Installed | Security Update for Microsoft Visual Studio 2008 Service Pack 1 XML Editor (KB2251487) | Important |
+
+	   Issue:  Expression Security Updates
+	   Score:  Check passed
+	   Result: No security updates are missing.
+
+		Current Update Compliance
+		
+			| MS12-022 | Installed | Security Update for Expression Design 4 (KB2667730) | Important |
+			| 2571841 | Installed | Expression Web 4 Service Pack 2  (KB2571841) |  |
+
+	   Issue:  Office Security Updates
+	   Score:  Check passed
+	   Result: No security updates are missing.
+
+		Current Update Compliance
+		
+			| MS11-094 | Installed | Security Update for Microsoft PowerPoint 2010 (KB2553185) 32-Bit Edition | Important |
+			| 949426 | Installed | Microsoft Office Accounting 2008 UK Service Pack 1 (KB949426) |  |
+			| 937961 | Installed | Office 2003 Web Components Service Pack 1 for the 2007 Microsoft Office System |  |
+			| MS12-027 | Installed | Security Update for Microsoft Office 2010 (KB2598039) 32-Bit Edition | Critical |
+			| MS11-072 | Installed | Security Update for Microsoft Office 2010 (KB2553091), 32-Bit Edition | Important |
+			| 949426 | Installed | Microsoft Office Accounting 2008 US Service Pack 1 (KB949426) |  |
+			| 2460043 | Installed | Service Pack 1 for Language Pack 2010 (KB2460043) 32-bit Edition |  |
+			| MS11-072 | Installed | Security Update for Microsoft Office 2010 (KB2553096), 32-Bit Edition | Important |
+			| MS11-074 | Installed | Security Update for Microsoft SharePoint Workspace 2010 (KB2566445), 32-Bit Edition | Important |
+			| MS09-062 | Installed | Security Update for the 2007 Microsoft Office System (KB972581) | Important |
+			| MS11-089 | Installed | Security Update for Microsoft Office 2010 (KB2589320) 32-Bit Edition | Important |
+			| MS09-043 | Installed | Security Update for Microsoft Office 2003 Web Components for the 2007 Microsoft Office System (KB947318) | Critical |
+			| MS12-027 | Installed | Security Update for Microsoft Office 2007 suites (KB2598041) | Critical |
+			| 2510690 | Installed | Service Pack 1 for Microsoft Office 2010 (KB2510690) 32-bit Edition |  |
+			| MS12-015 | Installed | Security Update for Microsoft Visio Viewer 2010 (KB2597170) 32-Bit Edition | Important |
+
+	   Issue:  SQL Server Security Updates
+	   Score:  Not approved
+	   Result: 1 security updates are missing and not approved.
+
+		Update Rollups and Service Packs
+		
+			| 2528583 | Not Approved | Microsoft SQL Server 2008 R2 Service Pack 1 (KB2528583) |  |
+
+		Current Update Compliance
+		
+			| MS11-049 | Installed | Security Update for SQL Server 2008 R2 (KB2494088) | Important |
+			| MS06-061 | Installed | MSXML 6.0 RTM Security Update  (925673) | Critical |
+
+	   Issue:  Silverlight Security Updates
+	   Score:  Check passed
+	   Result: No security updates are missing.
+
+		Current Update Compliance
+		
+			| MS12-016 | Installed | Security Update for Microsoft Silverlight (KB2668562) | Critical |
+
+	   Issue:  Windows Security Updates
+	   Score:  Check passed
+	   Result: No security updates are missing.
+
+		Current Update Compliance
+		
+			| MS10-084 | Installed | Security Update for Windows XP (KB2360937) | Important |
+			| MS10-096 | Installed | Security Update for Windows XP (KB2423089) | Important |
+			| MS11-098 | Installed | Security Update for Windows XP (KB2633171) | Important |
+			| MS12-005 | Installed | Security Update for Windows XP (KB2584146) | Important |
+			| MS09-059 | Installed | Security Update for Windows XP (KB975467) | Important |
+			| MS12-014 | Installed | Security Update for Windows XP (KB2661637) | Important |
+			| MS11-062 | Installed | Security Update for Windows XP (KB2566454) | Important |
+			| MS11-097 | Installed | Security Update for Windows XP (KB2620712) | Important |
+			| MS09-010 | Installed | Security Update for Windows XP (KB923561) | Important |
+			| MS11-011 | Installed | Security Update for Windows XP (KB2393802) | Important |
+			| MS11-014 | Installed | Security Update for Windows XP (KB2478960) | Important |
+			| MS08-054 | Installed | Security Update for Windows XP (KB954154) | Critical |
+			| MS11-052 | Installed | Security Update for Internet Explorer 8 for Windows XP (KB2544521) | Critical |
+			| MS10-055 | Installed | Security Update for Windows XP (KB982665) | Critical |
+			| MS11-031 | Installed | Security Update for Windows XP (KB2510531) | Critical |
+			| MS11-030 | Installed | Security Update for Windows XP (KB2509553) | Important |
+			| MS08-071 | Installed | Security Update for Windows XP (KB956802) | Critical |
+			| MS10-041 | Installed | Microsoft .NET Framework 3.5 SP1 and .NET Framework 2.0 SP2 Security Update for Windows 2000, Windows Server 2003, and Windows XP x86 (KB979909) | Important |
+			| MS11-044 | Installed | Security Update for Microsoft .NET Framework 4 on Windows XP, Windows Server 2003, Windows Vista, Windows 7, Windows Server 2008 x86 (KB2518870) | Critical |
+			| MS08-067 | Installed | Security Update for Windows XP (KB958644) | Critical |
+			| MS11-100 | Installed | Security Update for Microsoft .NET Framework 4 on XP, Server 2003, Vista, Windows 7, Server 2008 x86 (KB2656351) | Critical |
+			| MS11-090 | Installed | Cumulative Security Update for ActiveX Killbits for Windows XP (KB2618451) | Critical |
+			| 867460 | Installed | Microsoft .NET Framework 1.1 Service Pack 1 |  |
+			| MS09-037 | Installed | Security Update for Windows XP (KB973815) | Critical |
+			| MS09-013 | Installed | Security Update for Windows XP (KB960803) | Critical |
+			| MS12-016 | Installed | Security Update for Microsoft .NET Framework 4 on XP, Server 2003, Vista, Windows 7, Server 2008 x86 (KB2633870) | Critical |
+			| MS10-050 | Installed | Security Update for Windows XP (KB981997) | Important |
+			| MS10-005 | Installed | Security Update for Windows XP (KB978706) | Moderate |
+			| MS10-033 | Installed | Security Update for Windows XP (KB979482) | Critical |
+			| MS10-019 | Installed | Security Update for Windows XP (KB979309) | Critical |
+			| MS10-030 | Installed | Security Update for Windows XP (KB978542) | Critical |
+			| MS11-092 | Installed | Security Update for Windows XP (KB2619339) | Critical |
+			| MS10-013 | Installed | Security Update for Windows XP (KB977914) | Critical |
+			| 2633952 | Installed | Update for Windows XP (KB2633952) |  |
+			| MS08-076 | Installed | Security Update for Windows XP Service Pack 3 (KB952069) | Important |
+			| 2647518 | Installed | Update Rollup for ActiveX Killbits for Windows XP (KB2647518) |  |
+			| MS11-024 | Installed | Security Update for Windows XP (KB2506212) | Important |
+			| MS08-069 | Installed | Security Update for Windows XP (KB954459) | Important |
+			| MS09-069 | Installed | Security Update for Windows XP (KB974392) | Important |
+			| MS12-024 | Installed | Security Update for Windows XP (KB2653956) | Critical |
+			| MS11-020 | Installed | Security Update for Windows XP (KB2508429) | Critical |
+			| MS11-002 | Installed | Security Update for Windows XP (KB2419632) | Critical |
+			| MS09-037 | Installed | Security Update for Windows XP Service Pack 3 (KB973540) | Critical |
+			| MS09-061 | Installed | Microsoft .NET Framework 2.0 Service Pack 1 Security Update for Windows 2000, Windows Server 2003, and Windows XP (KB953300) | Critical |
+			| 890830 | Installed | Windows Malicious Software Removal Tool - April 2012 (KB890830) |  |
+			| MS12-025 | Installed | Security Update for Microsoft .NET Framework 4 on XP, Server 2003, Vista, Windows 7, Server 2008 x86 (KB2656368) | Critical |
+			| MS11-078 | Installed | Security Update for Microsoft .NET Framework 4 on XP, Server 2003, Vista, Windows 7, Server 2008 x86 (KB2572078) | Critical |
+			| MS09-073 | Installed | Security Update for Windows XP (KB973904) | Important |
+			| MS12-002 | Installed | Security Update for Windows XP (KB2603381) | Important |
+			| MS11-032 | Installed | Security Update for Windows XP (KB2507618) | Important |
+			| MS10-033 | Installed | Security Update for Windows Media Format Runtime 9, 9.5 &amp; 11 for Windows XP SP3 (KB978695) | Critical |
+			| MS10-063 | Installed | Security Update for Windows XP (KB981322) | Critical |
+			| MS10-065 | Installed | Security Update for Windows XP (KB2290570) | Important |
+			| MS12-020 | Installed | Security Update for Windows XP (KB2621440) | Critical |
+			| MS11-071 | Installed | Security Update for Windows XP (KB2570947) | Important |
+			| MS11-029 | Installed | Security Update for Windows XP (KB2412687) | Critical |
+			| MS08-036 | Installed | Security Update for Windows XP (KB950762) | Important |
+			| MS08-062 | Installed | Security Update for Windows XP (KB953155) | Important |
+			| MS10-026 | Installed | Security Update for Windows XP (KB977816) | Critical |
+			| MS11-042 | Installed | Security Update for Windows XP (KB2535512) | Critical |
+			| MS07-068 | Installed | Security Update for Windows XP with Windows Media Format Runtime 9.5 and 11 (KB941569) | Critical |
+			| MS09-037 | Installed | Security Update for Windows XP (KB973507) | Critical |
+			| MS10-013 | Installed | Security Update for Windows XP (KB975560) | Critical |
+			| MS11-080 | Installed | Security Update for Windows XP (KB2592799) | Important |
+			| MS09-056 | Installed | Security Update for Windows XP (KB974571) | Important |
+			| MS09-012 | Installed | Security Update for Windows XP (KB952004) | Important |
+			| MS09-051 | Installed | Security Update for Windows XP (KB975025) | Critical |
+			| MS09-037 | Installed | Security Update for Windows XP (KB973869) | Critical |
+			| MS11-100 | Installed | Security Update for Microsoft .NET Framework 2.0 SP2 on Windows Server 2003 and Windows XP x86 (KB2656352) | Critical |
+			| MS10-083 | Installed | Security Update for Windows XP (KB979687) | Important |
+			| MS11-100 | Installed | Security Update for Microsoft .NET Framework 1.1 SP1 on Windows XP, Windows Vista, and Windows Server 2008 x86 (KB2656353) | Critical |
+			| MS11-093 | Installed | Security Update for Windows XP (KB2624667) | Important |
+			| MS10-051 | Installed | Security Update for Windows XP (KB2079403) | Critical |
+			| MS09-022 | Installed | Security Update for Windows XP (KB961501) | Moderate |
+			| MS11-006 | Installed | Security Update for Windows XP (KB2483185) | Critical |
+			| MS09-046 | Installed | Security Update for Windows XP (KB956844) | Critical |
+			| MS10-061 | Installed | Security Update for Windows XP (KB2347290) | Critical |
+			| 951847 | Installed | Microsoft .NET Framework 3.5 Service Pack 1 and .NET Framework 3.5 Family Update (KB951847) x86 |  |
+			| MS09-012 | Installed | Security Update for Windows XP (KB956572) | Important |
+			| MS09-052 | Installed | Security Update for Windows XP (KB974112) | Critical |
+			| MS11-100 | Installed | Security Update for Microsoft .NET Framework 3.5 SP1 on Windows XP, Server 2003, Vista, Server 2008 x86 (KB2657424) | Critical |
+			| 951847 | Installed | Microsoft .NET Framework 3.5 Service Pack 1 and .NET Framework 3.5 Family Update for .NET versions 2.0 through 3.5 (KB951847) x86 |  |
+			| MS11-038 | Installed | Security Update for Windows XP (KB2476490) | Critical |
+			| 936929 | Installed | Windows XP Service Pack 3 (KB936929) |  |
+			| MS10-001 | Installed | Security Update for Windows XP (KB972270) | Low |
+			| MS11-056 | Installed | Security Update for Windows XP (KB2507938) | Important |
+			| MS09-051 | Installed | Security Update for Windows Media Format Runtime 9, 9.5 &amp; 11 for Windows XP SP 3 (KB954155) | Critical |
+			| MS10-029 | Installed | Security Update for Windows XP (KB978338) | Moderate |
+			| MS11-066 | Installed | Security Update for Microsoft .NET Framework 4 on Windows XP, Windows Server 2003, Windows Vista, Windows 7, Windows Server 2008 x86 (KB2487367) | Important |
+			| MS12-025 | Installed | Security Update for Microsoft .NET Framework 2.0 SP2 on Windows Server 2003 and Windows XP x86 (KB2656369) | Critical |
+			| MS09-041 | Installed | Security Update for Windows XP (KB971657) | Important |
+			| MS10-076 | Installed | Security Update for Windows XP (KB982132) | Critical |
+			| MS12-025 | Installed | Security Update for Microsoft .NET Framework 1.1 SP1 on Windows XP, Windows Vista, and Windows Server 2008 x86 (KB2656370) | Critical |
+			| MS10-099 | Installed | Security Update for Windows XP (KB2440591) | Important |
+			| MS12-004 | Installed | Security Update for Windows XP (KB2598479) | Critical |
+			| MS11-033 | Installed | Security Update for Windows XP (KB2485663) | Important |
+			| MS10-007 | Installed | Security Update for Windows XP (KB975713) | Critical |
+			| MS08-049 | Installed | Security Update for Windows XP (KB950974) | Important |
+			| MS10-042 | Installed | Security Update for Windows XP (KB2229593) | Critical |
+			| MS10-097 | Installed | Security Update for Windows XP (KB2443105) | Important |
+			| MS09-057 | Installed | Security Update for Windows XP (KB969059) | Important |
+			| MS09-071 | Installed | Security Update for Windows XP (KB974318) | Moderate |
+			| MS10-082 | Installed | Security Update for Windows XP (KB2378111) | Important |
+			| MS09-020 | Installed | Security Update for Windows XP (KB970483) | Important |
+			| MS10-062 | Installed | Security Update for Windows XP (KB975558) | Critical |
+			| MS10-052 | Installed | Security Update for Windows XP (KB2115168) | Critical |
+			| MS10-081 | Installed | Security Update for Windows XP (KB2296011) | Important |
+			| MS12-004 | Installed | Security Update for Windows XP (KB2631813) | Critical |
+			| MS12-006 | Installed | Security Update for Windows XP (KB2585542) | Important |
+			| MS12-003 | Installed | Security Update for Windows XP (KB2646524) | Important |
+			| MS11-043 | Installed | Security Update for Windows XP (KB2536276) | Critical |
+			| MS11-078 | Installed | Security Update for Microsoft .NET Framework 2.0 SP2 on Windows Server 2003 and Windows XP x86 (KB2572073) | Critical |
+			| MS11-037 | Installed | Security Update for Windows XP (KB2544893) | Important |
+			| MS11-013 | Installed | Security Update for Windows XP (KB2478971) | Important |
+			| MS11-017 | Installed | Security Update for Windows XP (KB2483614) | Important |
+			| MS11-075 | Installed | Security Update for Windows XP (KB2564958) | Important |
+			| MS11-015 | Installed | Security Update for Windows XP (KB2479943) | Critical |
+			| MS09-053 | Installed | Security Update for Windows XP (KB975254) | Important |
+			| 944036 | Installed | Internet Explorer 8 for Windows XP with Language Interface Pack |  |
+			| MS09-042 | Installed | Security Update for Windows XP (KB960859) | Important |
+			| MS12-016 | Installed | Security Update for Microsoft .NET Framework 2.0 SP2 on Windows Server 2003 and Windows XP x86 (KB2633880) | Critical |
+			| MS10-074 | Installed | Security Update for Windows XP (KB2387149) | Moderate |
+			| MS12-018 | Installed | Security Update for Windows XP (KB2641653) | Important |
+			| MS10-024 | Installed | Security Update for Windows XP (KB976323) | Important |
+			| MS08-050 | Installed | Security Update for Windows XP (KB946648) | Important |
+			| 944036 | Installed | Internet Explorer 8 for Windows XP |  |
+			| MS09-015 | Installed | Security Update for Windows XP (KB959426) | Moderate |
+			| MS10-065 | Installed | Security Update for Windows XP (KB2124261) | Important |
+			| MS08-046 | Installed | Security Update for Windows XP (KB952954) | Critical |
+			| MS11-044 | Installed | Security Update for .NET Framework 2.0 SP2 and 3.5 SP1 on Windows Server 2003 and Windows XP x86 (KB2518864) | Critical |
+			| MS08-030 | Installed | Security Update for Windows XP (KB951376) | Critical |
+			| MS12-023 | Installed | Cumulative Security Update for Internet Explorer 8 for Windows XP (KB2675157) | Critical |
+
+
+Operating System Scan Results
+	
+Administrative Vulnerabilities
+		
+	   Issue:  Local Account Password Test
+	   Score:  Check passed
+	   Result: Some user accounts (1 of 10) have blank or simple passwords, or could not be analyzed.
+	   Detail:
+			| User | Weak Password | Locked Out | Disabled |
+			| Guest | Weak | - | Disabled |
+			| HelpAssistant | - | - | Disabled |
+			| SUPPORT_388945a0 | - | - | Disabled |
+			| ASPNET | - | - | - |
+			| Admin | - | - | - |
+			| Administrator | - | - | - |
+			| IA | - | - | - |
+			| IUSR_PC0674 | - | - | - |
+			| IWAM_PC0674 | - | - | - |
+			| mnguyen | - | - | - |
+
+	   Issue:  File System
+	   Score:  Check passed
+	   Result: All hard drives (2) are using the NTFS file system.
+	   Detail:
+			| Drive Letter | File System |
+
+			| C: | NTFS |
+			| D: | NTFS |
+
+	   Issue:  Password Expiration
+	   Score:  Check failed (non-critical)
+	   Result: Some user accounts (3 of 10) have non-expiring passwords.
+	   Detail:
+			| User |
+			| Guest |
+			| IA |
+			| mnguyen |
+			| ASPNET |
+			| HelpAssistant |
+			| IUSR_PC0674 |
+			| IWAM_PC0674 |
+			| SUPPORT_388945a0 |
+
+	   Issue:  Guest Account
+	   Score:  Check passed
+	   Result: The Guest account is disabled on this computer.
+
+	   Issue:  Autologon
+	   Score:  Check passed
+	   Result: Autologon is not configured on this computer.
+
+	   Issue:  Restrict Anonymous
+	   Score:  Check passed
+	   Result: Computer is properly restricting anonymous access.
+
+	   Issue:  Administrators
+	   Score:  Check failed (non-critical)
+	   Result: More than 2 Administrators were found on this computer.
+	   Detail:
+			| User |
+			| Admin |
+			| Administrator |
+			| IA |
+			| S-1-5-21-3399071088-3473388624-3277992803-13764 |
+			| STARREN\IA |
+			| STARREN\mnguyen |
+
+	   Issue:  Windows Firewall
+	   Score:  Best practice
+	   Result: Windows Firewall is enabled and has exceptions configured. Windows Firewall is enabled on all network connections.
+	   Detail:
+			| Connection Name | Firewall | Exceptions |
+			| All Connections | On | Ports, Programs, Services |
+			| Local Area Connection | On | Ports*, Programs*, Services* |
+
+	   Issue:  Automatic Updates
+	   Score:  Best practice
+	   Result: Automatic Updates are managed through Group Policy on this computer.
+
+	   Issue:  Incomplete Updates
+	   Score:  Best practice
+	   Result: No incomplete software update installations were found.
+
+	Additional System Information
+		
+	   Issue:  Windows Version
+	   Score:  Best practice
+	   Result: Computer is running Microsoft Windows XP.
+
+	   Issue:  Auditing
+	   Score:  Best practice
+	   Result: Logon Success and Logon Failure auditing are both enabled.
+
+	   Issue:  Shares
+	   Score:  Best practice
+	   Result: 7 share(s) are present on your computer.
+	   Detail:
+			| Share | Directory | Share ACL | Directory ACL |
+			| ADMIN$ | C:\WINDOWS | Admin Share | BUILTIN\Users -  RX, BUILTIN\Power Users -  RWXD, BUILTIN\Administrators -  F, NT AUTHORITY\SYSTEM -  F |
+			| BlockKeys | D:\BlockKeys | Everyone -  R | BUILTIN\Administrators -  F, NT AUTHORITY\SYSTEM -  F, STARREN\mnguyen -  F, BUILTIN\Users -  RX |
+			| C$ | C:\ | Admin Share | BUILTIN\Administrators -  F, NT AUTHORITY\SYSTEM -  F, BUILTIN\Users -  RX, Everyone -  RX |
+			| CC | d:\Block | Everyone -  F | BUILTIN\Administrators -  F, NT AUTHORITY\SYSTEM -  F, STARREN\mnguyen -  F, BUILTIN\Users -  RX |
+			| D$ | D:\ | Admin Share | BUILTIN\Administrators -  F, NT AUTHORITY\SYSTEM -  F, BUILTIN\Users -  RX, Everyone -  RX |
+			| Man | d:\Block | Everyone -  F | BUILTIN\Administrators -  F, NT AUTHORITY\SYSTEM -  F, STARREN\mnguyen -  F, BUILTIN\Users -  RX |
+			| Man$ | d:\Block | Everyone -  R | BUILTIN\Administrators -  F, NT AUTHORITY\SYSTEM -  F, STARREN\mnguyen -  F, BUILTIN\Users -  RX |
+
+	   Issue:  Services
+	   Score:  Best practice
+	   Result: Some potentially unnecessary services are installed.
+	   Detail:
+			| Service | State |
+			| FTP Publishing | Running |
+			| Simple Mail Transfer Protocol (SMTP) | Running |
+			| Telnet | Stopped |
+			| World Wide Web Publishing | Running |
+
+
+Internet Information Services (IIS) Scan Results
+	
+	Administrative Vulnerabilities
+		
+	   Issue:  Sample Applications
+	   Score:  Check failed (critical)
+	   Result: Some IIS sample applications are installed.
+	   Detail:
+			| Web Site | Virtual Directory |
+			| Default Web Site | IISHelp |
+
+	   Issue:  IISAdmin Virtual Directory
+	   Score:  Check passed
+	   Result: IISADMPWD virtual directory is not present.
+
+	   Issue:  Parent Paths
+	   Score:  Check failed (critical)
+	   Result: Parent paths are enabled in some web sites and/or virtual directories.
+	   Detail:
+			| Web Site | Virtual Directory |
+			| Default Web Site | - |
+			| Default Web Site | Scripts |
+			| Default Web Site | tsweb |
+			| Default Web Site | _vti_bin |
+			| Default Web Site | Printers |
+
+	   Issue:  MSADC and Scripts Virtual Directories
+	   Score:  Check failed (non-critical)
+	   Result: Scripts virtual directory was found under one or more web sites.
+
+	   Issue:  IIS Lockdown Tool
+	   Score:  Check failed (critical)
+	   Result: The IIS Lockdown tool has not been run on the machine.
+
+	Additional System Information
+		
+	   Issue:  IIS Logging Enabled
+	   Score:  Best practice
+	   Result: Some web or FTP sites are not using the recommended logging options.
+	   Detail:
+			| Name | Protocol |
+			| Default FTP Site | FTP |
+			| Default Web Site | HTTP |
+
+
+SQL Server Scan Results
+
+Instance (default)
+
+Administrative Vulnerabilities
+		
+	   Issue:  SQL Server/MSDE Security Mode
+	   Score:  Check failed (non-critical)
+	   Result: SQL Server and/or MSDE authentication mode is set to SQL Server and/or MSDE and Windows (Mixed Mode).
+
+	   Issue:  CmdExec role
+	   Score:  Check passed
+	   Result: CmdExec is restricted to sysadmin only.
+
+	   Issue:  Registry Permissions
+	   Score:  Check passed
+	   Result: The Everyone group does not have more than Read access to the SQL Server and/or MSDE registry keys.
+
+	   Issue:  Folder Permissions
+	   Score:  Check passed
+	   Result:
+	   Detail:
+			| Instance | Folder | User |
+			| (default) | Internal error. | - |
+
+	   Issue:  Sysadmin role members
+	   Score:  Best practice
+	   Result: BUILTIN\Administrators group should not be part of sysadmin role.
+
+	   Issue:  Guest Account
+	   Score:  Check passed
+	   Result: The Guest account is not enabled in any of the databases.
+
+	   Issue:  Sysadmins
+	   Score:  Check failed (non-critical)
+	   Result: More than 2 members of sysadmin role are present.
+
+	   Issue:  Service Accounts
+	   Score:  Best practice
+	   Result: SQL Server, SQL Server Agent, MSDE and/or MSDE Agent service accounts should not be members of the local Administrators group or run as LocalSystem.
+	   Detail:
+			| Instance | Service | Account | Issue |
+			| (default) | MSSQLServer | SYSTEM | LocalSystem account. |
+			| (default) | SQLServerAgent | SYSTEM | LocalSystem account. |
+
+	   Issue:  Password Policy
+	   Score:  Check failed (critical)
+	   Result: Enable password expiration for the SQL server accounts.
+
+	   Issue:  SSIS Roles
+	   Score:  Check passed
+	   Result: The BUILTIN Admin does not belong to the SSIS roles.
+
+	   Issue:  Sysdtslog
+	   Score:  Check passed
+	   Result: Sysdtslogs90 table does not exist in the Master or MSDB databases
+
+
+Instance MSRS10_50.MSSQLSERVER
+
+Administrative Vulnerabilities
+		
+	   Issue:  SQL Server/MSDE Security Mode
+	   Score:  Check failed (non-critical)
+	   Result: SQL Server and/or MSDE authentication mode is set to SQL Server and/or MSDE and Windows (Mixed Mode).
+
+	   Issue:  CmdExec role
+	   Score:  Check passed
+	   Result: CmdExec is restricted to sysadmin only.
+
+	   Issue:  Registry Permissions
+	   Score:  Check passed
+	   Result: The Everyone group does not have more than Read access to the SQL Server and/or MSDE registry keys.
+
+	   Issue:  Folder Permissions
+	   Score:  Check passed
+	   Result:
+	   Detail:
+			| Instance | Folder | User |
+			| MSRS10_50.MSSQLSERVER | Internal error. | - |
+
+	   Issue:  Sysadmin role members
+	   Score:  Check not performed
+	   Result: [Microsoft][ODBC SQL Server Driver][DBMSLPCN]SQL Server does not exist or access denied.
+
+	   Issue:  Guest Account
+	   Score:  Check not performed
+	   Result: [Microsoft][ODBC SQL Server Driver][DBMSLPCN]SQL Server does not exist or access denied.
+
+	   Issue:  Sysadmins
+	   Score:  Check not performed
+	   Result: [Microsoft][ODBC SQL Server Driver][DBMSLPCN]SQL Server does not exist or access denied.
+
+	   Issue:  Service Accounts
+	   Score:  Check passed
+	   Result: SQL Server, SQL Server Agent, MSDE and/or MSDE Agent service accounts are not members of the local Administrators group and do not run as LocalSystem.
+
+	   Issue:  Password Policy
+	   Score:  Check not performed
+	   Result: [Microsoft][ODBC SQL Server Driver][DBMSLPCN]SQL Server does not exist or access denied.
+
+	   Issue:  SSIS Roles
+	   Score:  Check not performed
+	   Result: [Microsoft][ODBC SQL Server Driver][DBMSLPCN]SQL Server does not exist or access denied.
+
+	   Issue:  Sysdtslog
+	   Score:  Check not performed
+	   Result: [Microsoft][ODBC SQL Server Driver][DBMSLPCN]SQL Server does not exist or access denied.
+
+
+Instance MSSQL10_50.MSSQLSERVER
+
+Administrative Vulnerabilities
+		
+	   Issue:  SQL Server/MSDE Security Mode
+	   Score:  Check failed (non-critical)
+	   Result: SQL Server and/or MSDE authentication mode is set to SQL Server and/or MSDE and Windows (Mixed Mode).
+
+	   Issue:  CmdExec role
+	   Score:  Unable to scan
+	   Result: Error reading registry. If you are scanning a remote computer the Remote Registry service on that computer should be enabled. (13)
+
+	   Issue:  Registry Permissions
+	   Score:  Check passed
+	   Result: The Everyone group does not have more than Read access to the SQL Server and/or MSDE registry keys.
+
+	   Issue:  Folder Permissions
+	   Score:  Check failed (critical)
+	   Result: Permissions on the SQL Server and/or MSDE installation folders are not set properly.
+	   Detail:
+			| Instance | Folder | User |
+			| MSSQL10_50.MSSQLSERVER | C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\Binn | \CREATOR OWNER |
+			| MSSQL10_50.MSSQLSERVER | C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\Binn | BUILTIN\Users |
+			| MSSQL10_50.MSSQLSERVER | C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\Binn | PC0674\SQLServerMSSQLUser$PC0674$MSSQLSERVER |
+			| MSSQL10_50.MSSQLSERVER | C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\Data | \CREATOR OWNER |
+			| MSSQL10_50.MSSQLSERVER | C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\Data | PC0674\SQLServerMSSQLUser$PC0674$MSSQLSERVER |
+
+	   Issue:  Sysadmin role members
+	   Score:  Check not performed
+	   Result: [Microsoft][ODBC SQL Server Driver][DBMSLPCN]SQL Server does not exist or access denied.
+
+	   Issue:  Guest Account
+	   Score:  Check not performed
+	   Result: [Microsoft][ODBC SQL Server Driver][DBMSLPCN]SQL Server does not exist or access denied.
+
+	   Issue:  Sysadmins
+	   Score:  Check not performed
+	   Result: [Microsoft][ODBC SQL Server Driver][DBMSLPCN]SQL Server does not exist or access denied.
+
+	   Issue:  Service Accounts
+	   Score:  Check passed
+	   Result: SQL Server, SQL Server Agent, MSDE and/or MSDE Agent service accounts are not members of the local Administrators group and do not run as LocalSystem.
+
+	   Issue:  Password Policy
+	   Score:  Check not performed
+	   Result: [Microsoft][ODBC SQL Server Driver][DBMSLPCN]SQL Server does not exist or access denied.
+
+	   Issue:  SSIS Roles
+	   Score:  Check not performed
+	   Result: [Microsoft][ODBC SQL Server Driver][DBMSLPCN]SQL Server does not exist or access denied.
+
+	   Issue:  Sysdtslog
+	   Score:  Check not performed
+	   Result: [Microsoft][ODBC SQL Server Driver][DBMSLPCN]SQL Server does not exist or access denied.
+
+
+Desktop Application Scan Results
+	
+	Administrative Vulnerabilities
+		
+	   Issue:  IE Zones
+	   Score:  Check passed
+	   Result: Internet Explorer zones have secure settings for all users.
+
+	   Issue:  Macro Security
+	   Score:  Check not performed
+	   Result: No supported Microsoft Office products are installed.
+

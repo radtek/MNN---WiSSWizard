@@ -1,0 +1,194 @@
+Current security settings of your system
+            Wednesday 4-7-2012
+
+Password policy:
+
+    The following Password Policy are on your system:
+      Enforce Password History 2
+      Maximum Password Age 66
+      Minimum Password Age 0
+      Minimum Password Length 7
+      Password must meet complexity requirements Disabled
+      Store password using reversible encryption Enabled
+
+Control policy:
+
+   The following Audit policies are on your system:
+     Audit Account Logon Events Success, Failure
+     Audit Account Management Success, Failure
+     Audit Directory Service Access Failure
+     Audit Logon Events Success, Failure
+     Audit Object Access No auditing
+     Audit Policy Change Success, Failure
+     Audit Privilege Use No auditing
+     Audit Process Tracking No auditing
+     Audit System Events Success, Failure
+
+Windows user groups
+
+    The following user groups are installed on your system:
+        Administrators
+        Backup Operators
+        Cryptographic Operators
+        Distributed COM Users
+        Event Log Readers
+        Guests
+        IIS_IUSRS
+        Network Configuration Operators
+        Performance Log Users
+        Performance Monitor Users
+        Power Users
+        Remote Desktop Users
+        Replicator
+        Users
+        Actemium Engineers
+        Debugger Users
+        HelpLibraryUpdaters
+        IIS_WPG
+        SQLServer2005SQLBrowserUser$XMAN-PC
+        SQLServerMSSQLServerADHelperUser$XMAN-PC
+        SQLServerMSSQLUser$xMan-PC$SQLEXPRESS
+        SQLServerSQLAgentUser$XMAN-PC$SQLEXPRESS
+        __vmware__
+
+Windows users
+
+    The following users have been installed on your system:
+        Administrator
+        ASPNET
+        Guest
+        UpdatusUser
+        xMan
+
+Autoplay settings:
+
+    The Autoplay setting on this system:
+        Autoplay is disabled on all drives
+
+wpNetworkConfigure
+
+    The following Network Interface Cards are installed in your system:
+      Current configure for [00000017] Atheros AR9002WB-1NG Wireless Network Adapter
+      Current IP address: 192.168.84.1 fe80::ccee:2c1:2075:2d2a
+      Current Subnet mask: 255.255.255.0 64
+      Default gateway: 192.168.84.254
+      DNS Domain: home
+      DNS Server: 213.46.228.196 62.179.104.196
+      -------------------------------------------------------
+      Current configure for [00000023] VMware Virtual Ethernet Adapter for VMnet1
+      Current IP address: 192.168.246.1 fe80::39e7:58:5540:9463
+      Current Subnet mask: 255.255.255.0 64
+      Default gateway: 
+      DNS Domain: 
+      DNS Server: 
+      -------------------------------------------------------
+      Current configure for [00000024] VMware Virtual Ethernet Adapter for VMnet8
+      Current IP address: 192.168.163.1 fe80::b44d:102:7171:fa93
+      Current Subnet mask: 255.255.255.0 64
+      Default gateway: 
+      DNS Domain: 
+      DNS Server: 
+      -------------------------------------------------------
+
+Windows Explorer settings:
+
+    The Folder options on this system:
+        Automatically search for network folders and printers check = OFF
+        Show the contents of system folders = ON
+        Display the full path in the address bar = ON
+        Hidden files and folders = ON
+        Hide extensions for known file types = OFF
+        Hide protected operating system files = OFF
+        The view settings for each folder = OFF
+        Show encrypted or compressed NTFS files in color = ON
+
+AutoLogon settings:
+
+    The settings for automatic logging into this system:
+        Automatic login is disabled
+
+Shutdown eventtracker settings:
+
+    The settings for the shutdown event tracker are:
+        Shutdown event tracker is disabled
+
+Remote Desktop settings:
+
+    The settings for Remote Desktop are:
+        Remote Desktop disabled
+
+Firewall settings:
+
+        
+        Firewall status:
+        -------------------------------------------------------------------
+        Profile                           = Standard
+        Operational mode                  = Enable
+        Exception mode                    = Enable
+        Multicast/broadcast response mode = Enable
+        Notification mode                 = Enable
+        Group policy version              = Windows Firewall
+        Remote admin mode                 = Disable
+        
+        Ports currently open on all network interfaces:
+        Port   Protocol  Version  Program
+        -------------------------------------------------------------------
+        2133   TCP       Any      (null)
+        443    TCP       Any      (null)
+        443    TCP       Any      (null)
+        21     TCP       Any      (null)
+        21     TCP       Any      (null)
+        
+        IMPORTANT: Command executed successfully.
+        However, "netsh firewall" is deprecated;
+        use "netsh advfirewall firewall" instead.
+        For more information on using "netsh advfirewall firewall" commands
+        instead of "netsh firewall", see KB article 947709
+        at http://go.microsoft.com/fwlink/?linkid=121488 .
+        
+        
+        
+        Allowed programs configuration for Domain profile:
+        Mode     Traffic direction    Name / Program
+        -------------------------------------------------------------------
+        Enable   Inbound              µTorrent (TCP-In) / C:\Program Files (x86)\uTorrent\uTorrent.exe
+        
+        Allowed programs configuration for Standard profile:
+        Mode     Traffic direction    Name / Program
+        -------------------------------------------------------------------
+        Disable  Inbound              Client to make VoIP calls. / C:\program files (x86)\12voip.com\12voip\12voip.exe
+        Enable   Inbound              StarCraft II / D:\games\starcraft ii us\versions\base19679\sc2.exe
+        Enable   Inbound              µTorrent (TCP-In) / C:\Program Files (x86)\uTorrent\uTorrent.exe
+        Enable   Inbound              ASUS Mobilink / C:\Program Files (x86)\ASUS\AI Suite II\ASUS Mobilink\iPhone Simulator\pnSvc.exe
+        
+        IMPORTANT: Command executed successfully.
+        However, "netsh firewall" is deprecated;
+        use "netsh advfirewall firewall" instead.
+        For more information on using "netsh advfirewall firewall" commands
+        instead of "netsh firewall", see KB article 947709
+        at http://go.microsoft.com/fwlink/?linkid=121488 .
+        
+        
+        
+        Port configuration for Domain profile:
+        Port   Protocol  Mode    Traffic direction     Name
+        -------------------------------------------------------------------
+        2133   TCP       Enable  Inbound               Man's port
+        
+        Port configuration for Standard profile:
+        Port   Protocol  Mode    Traffic direction     Name
+        -------------------------------------------------------------------
+        2133   TCP       Enable  Inbound               Man's port
+        443    TCP       Enable  Inbound               Web Server https
+        21     TCP       Enable  Inbound               FTPServer
+        
+        IMPORTANT: Command executed successfully.
+        However, "netsh firewall" is deprecated;
+        use "netsh advfirewall firewall" instead.
+        For more information on using "netsh advfirewall firewall" commands
+        instead of "netsh firewall", see KB article 947709
+        at http://go.microsoft.com/fwlink/?linkid=121488 .
+        
+        
+        
+        

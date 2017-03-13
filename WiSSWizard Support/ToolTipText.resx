@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ttAuditAccountLogon" xml:space="preserve">
+    <value>Controle van accountaanmeldingsgebeurtenissen:
+
+Met deze beveiligingsinstelling bepaalt u of elke aanmelding of afmelding van een gebruiker 
+vanaf een andere computer moet worden gecontroleerd, waarbij die computer wordt gebruikt 
+om de account te valideren. 
+Accountaanmeldingsgebeurtenissen worden gegenereerd als een domeingebruikersaccount wordt geverifieerd op een domeincontroller.
+
+De gebeurtenis wordt geregistreerd in het beveiligingslogboek van de domeincontroller. 
+Aanmeldingsgebeurtenissen worden gegenereerd als een lokale gebruiker wordt geverifieerd op 
+een lokale computer. 
+De gebeurtenis wordt geregistreerd in het lokale gebeurtenislogboek. Accountafmeldingsgebeurtenissen
+worden niet gegenereerd. 
+Als u deze beleidsinstelling definieert, kunt u opgeven of u geslaagde pogingen of mislukte pogingen 
+wilt controleren of het type gebeurtenis helemaal niet wilt controleren. 
+Als u geslaagde pogingen controleert, wordt er een vermelding gegenereerd als een accountaanmeldingspoging slaagt. 
+Als u mislukte pogingen controleert, wordt er een vermelding gegenereerd als een 
+accountaanmeldingspoging mislukt. 
+
+Voorkeurs instelling: Geslaagde, mislukte</value>
+  </data>
+  <data name="ttAuditAccountManagement" xml:space="preserve">
+    <value>Controle van accountbeheer:
+
+Met deze beveiligingsinstelling bepaalt u of elke accountbeheergebeurtenis op een computer moet worden gecontroleerd. 
+Voorbeelden van accountbeheergebeurtenissen zijn:
+	- Er wordt een gebruikersaccount of gebruikersgroep gemaakt, gewijzigd of verwijderd.
+	- De naam van een gebruikersaccount wordt gewijzigd, of de account wordt uit- of ingeschakeld.
+	- Er wordt een wachtwoord ingesteld of gewijzigd.
+Als u deze beleidsinstelling definieert, kunt u opgeven of u geslaagde pogingen of mislukte pogingen wilt
+controleren of het type gebeurtenis helemaal niet wilt controleren. 
+Als u geslaagde pogingen controleert, wordt er bij elke geslaagde accountbeheergebeurtenis een
+vermelding gegenereerd. 
+Als u mislukte pogingen controleert, wordt er bij elke mislukte accountbeheergebeurtenis een vermelding gegenereerd. 
+
+Voorkeurs instelling: 
+Geslaagde pogingen op domeincontrollers, Geen controle op lidservers</value>
+  </data>
+  <data name="ttAuditActiveDirectoryAcces" xml:space="preserve">
+    <value>Controle van active Directory-toegang:  
+
+Met deze beveiligingsinstelling bepaalt u of er een controle moet worden uitgevoerd wanneer een
+gebruiker toegang probeert te krijgen tot een Active Directory-object waarvoor een afzonderlijke SACL
+(System Access Control List, systeemtoegangsbeheerlijst) is gedefinieerd.
+Deze waarde wordt standaard ingesteld in het groepsbeleidsobject Standaarddomeincontroller, en wordt
+niet gedefinieerd voor werkstations en servers omdat deze waarde dan geen betekenis heeft.
+Als u deze beleidsinstelling definieert, kunt u opgeven of u geslaagde pogingen of mislukte pogingen wilt
+controleren of het type gebeurtenis helemaal niet wilt controleren. Als u geslaagde pogingen controleert,
+wordt er een vermelding gegenereerd als een gebruiker erin slaagt toegang te krijgen tot een 
+Active Directory-object waarvoor een SACL is gedefinieerd. Als u mislukte pogingen controleert, 
+wordt er een vermelding gegenereerd als het een gebruiker niet lukt om toegang te krijgen tot een 
+Active Directory-object waarvoor een SACL is gedefinieerd.
+
+Voorkeursinstelling: Mislukte</value>
+  </data>
+  <data name="ttAuditLogonEvents" xml:space="preserve">
+    <value>Controle van aanmeldingsgebeurtenissen:
+
+Met deze beveiligingsinstelling bepaalt u of er een controle moet worden 
+uitgevoerd wanneer een gebruiker zich aanmeldt of afmeldt bij een computer.
+
+Voorkeurs instelling: Geslaagde, mislukte</value>
+  </data>
+  <data name="ttAuditObjectAcces" xml:space="preserve">
+    <value>Controle van objecttoegang:  
+
+Met deze beveiligingsinstelling bepaalt u of er een controle moet worden uitgevoerd wanneer een
+gebruiker toegang probeert te krijgen tot een object (bijvoorbeeld een bestand, map, registersleutel,
+printer, enzovoort) waarvoor een afzonderlijke SACL (System Access Control List, 
+systeemtoegangsbeheerlijst) is gedefinieerd.
+Als u deze beleidsinstelling definieert, kunt u opgeven of u geslaagde pogingen of mislukte pogingen wilt
+controleren of het type gebeurtenis helemaal niet wilt controleren. Als u geslaagde pogingen controleert,
+wordt er een vermelding gegenereerd als een gebruiker erin slaagt toegang te krijgen tot een object
+waarvoor een geschikte SACL is gedefinieerd. Als u mislukte pogingen controleert, wordt er een
+vermelding gegenereerd als het een gebruiker niet lukt om toegang te krijgen tot een object waarvoor
+een SACL is gedefinieerd.
+
+Voorkeursinstelling:    Mislukte</value>
+  </data>
+  <data name="ttAuditPolicyChange" xml:space="preserve">
+    <value>Controle van beleidswijzigingen: 
+
+Met deze beveiligingsinstelling bepaalt u of er een controle moet worden uitgevoerd bij een wijziging van
+het beleid voor het toewijzen van gebruikersrechten, het controlebeleid of het beleid voor
+vertrouwensinstellingen.
+Als u deze beleidsinstelling definieert, kunt u opgeven of u geslaagde pogingen of mislukte pogingen wilt
+controleren of het type gebeurtenis helemaal niet wilt controleren. Als u geslaagde pogingen controleert,
+wordt er een vermelding gegenereerd als het lukt om een wijziging door te voeren in het beleid voor het
+toewijzen van gebruikersrechten, het controlebeleid of het beleid voor vertrouwensinstellingen. 
+Als u  mislukte pogingen controleert, wordt er een vermelding gegenereerd als het niet lukt om een dergelijke wijziging door te voeren.
+
+Voorkeursinstelling: Geslaagde, mislukte</value>
+  </data>
+  <data name="ttAuditPrivilegeUse" xml:space="preserve">
+    <value>Controle van gebruik van bevoegdheden:   
+
+Met deze beveiligingsinstelling bepaalt u of er een controle moet worden
+uitgevoerd wanneer gebruik wordt gemaakt van een gebruikersrecht.
+
+Voorkeursinstelling:     Geen controle</value>
+  </data>
+  <data name="ttAuditProcessTracking" xml:space="preserve">
+    <value>Controle van procesopsporing:   
+
+Met deze beveiligingsinstelling bepaalt u of u uitgebreide traceringsinformatie wilt controleren voor
+gebeurtenissen als het activeren van programma's, het afsluiten van processen, het uitvoeren van
+kopieerbewerkingen of de toegang tot indirecte objecten.
+Als u deze beleidsinstelling definieert, kunt u opgeven of u geslaagde pogingen of mislukte pogingen wilt
+controleren of het type gebeurtenis helemaal niet wilt controleren. Als u geslaagde pogingen controleert,
+wordt er een vermelding gegenereerd als het lukt om het proces uit te voeren dat moet worden 
+getraceerd. Als u mislukte pogingen controleert, wordt er een vermelding gegenereerd als het niet lukt om 
+het proces uit te voeren dat moet worden getraceerd.
+
+Voorkeursinstelling:   Geen controle</value>
+  </data>
+  <data name="ttAuditSytemEvents" xml:space="preserve">
+    <value>Controle van systeemgebeurtenissen:   
+
+Met deze beveiligingsinstelling bepaalt u of er een controle moet worden uitgevoerd wanneer een
+gebruiker de computer afsluit of opnieuw start of als zich een gebeurtenis voordoet die van invloed is op
+de systeembeveiliging of het beveiligingslogboek.
+Als u deze beleidsinstelling definieert, kunt u opgeven of u geslaagde pogingen of mislukte pogingen wilt
+controleren of het type gebeurtenis helemaal niet wilt controleren. Als u geslaagde pogingen controleert,
+wordt er een vermelding gegenereerd als het lukt om een systeemgebeurtenis uit te voeren. 
+Als u mislukte pogingen controleert, wordt er een vermelding gegenereerd als het niet lukt om een
+systeemgebeurtenis uit te voeren.
+
+Voorkeursinstelling:       Geslaagde, mislukte</value>
+  </data>
+  <data name="ttAutoPlay" xml:space="preserve">
+    <value>Autoplay instellingen:
+
+Autoplay zorgt er voor dat op het moment dat er media in een drive wordt gekoppeld, dit direct wordt uitgevoerd. 
+Het is mogelijk dit uit te schakelen voor alle drives, of CD-ROM and removable media drives.
+
+Voorkeurs instelling: Uitschakelen voor ‘All drives’</value>
+  </data>
+  <data name="ttAutoSearchFoldersPrinters" xml:space="preserve">
+    <value>Automatically search for network folders and printers:
+
+Hiermee geeft u op dat periodiek wordt gezocht naar gedeelde mappen en printers in het netwerk.
+Alle gedeelde mappen en printers die worden gevonden, worden weergegeven in mijn netwerklocaties.
+
+Voorkeursinstelling: Uit</value>
+  </data>
+  <data name="ttCheckCurrentSettings" xml:space="preserve">
+    <value>Genereert een rapport met de huidige security 
+instellingen van dit systeem.</value>
+  </data>
+  <data name="ttDisplayContentsSysFolders" xml:space="preserve">
+    <value>Display the contents of system folders: 
+
+Hiermee wordt de inhoud van systeemmappen weergegeven. Systeemmappen, zoals het systeemstation
+(meestal station C, tenzij u meer dan één station hebt op de computer), Program Files, Documents and
+Settings en Windows, bevatten bestanden die de computer nodig heeft om 
+goed te functioneren. De inhoud van deze mappen wordt standaard verborgen.
+
+Voorkeursinstelling: Aan</value>
+  </data>
+  <data name="ttDisplayFullPathAddressBar" xml:space="preserve">
+    <value>Display the full path in the address bar:
+
+Hiermee wordt het volledige pad van het geopende bestand of de geopende
+map in de adresbalk van het venster weergegeven.
+
+Voorkeursinstelling: Aan</value>
+  </data>
+  <data name="ttFireWall" xml:space="preserve">
+    <value>Windowsfirewall:
+
+Op deze Wizard pagina kunt u uitzonderingen in de firewall aangeven.
+Geeft u hier niets aan, dan wordt de firewall volledig dicht gezet.
+Een aantal opties is al weergegeven, overige applicaties welke toegang door de firewall nodig hebben
+kunnen worden opgezocht, daarnaast kunnen specifieke poorten worden opengezet.</value>
+  </data>
+  <data name="ttHideExtensions" xml:space="preserve">
+    <value>Hide extensions for known file types:
+
+Hiermee wordt het laatste deel van een bestandsnaam verborgen, zodat 
+mapvensters overzichtelijker worden.
+
+Voorkeursinstelling: Uit</value>
+  </data>
+  <data name="ttHideProtectedSysFiles" xml:space="preserve">
+    <value>Hide protected operating system files 
+
+Hiermee worden besturingssysteembestanden niet weergegeven in de lijst
+met bestanden in deze map, zodat ze niet per ongeluk kunnen worden verwijderd of gewijzigd.
+
+Voorkeursinstelling: Uit</value>
+  </data>
+  <data name="ttMBSA" xml:space="preserve">
+    <value>MBSA:
+
+Microsoft Baseline Security Analyzer controleert de beveiliging van het systeem. 
+Dit kan alleen als MBSA is geïnstalleerd op het systeem. De controle neemt een aantal minuten in beslag.
+Het resultaat van deze analyzer wordt toegevoegd aan het logboek en kan worden gebruikt om
+additionele maatregelen te nemen. 
+Tevens kan het resultaat worden gebruikt om deze security checklist applicatie te verbeteren.</value>
+  </data>
+  <data name="ttPasswordComplexity" xml:space="preserve">
+    <value>Wachtwoord complexiteit betekent:
+
+- Wachtwoorden kunnen niet bestaan uit de gedeeltelijke of volledige naam van het gebruikersaccount
+- Een wachtwoord moet drie van de volgende vier typen tekens bevatten:
+	- Hoofdletters (A - Z)
+	- Kleine letters (a - z)
+	- Cijfers (0 – 9)
+	- Niet-alfanumerieke tekens (~!@#$%^&amp;*_-+=`|\(){}[]:;"'&lt;&gt;,.?/)
+
+Voorkeurs instelling: Ingeschakeld</value>
+  </data>
+  <data name="ttPasswordEncryption" xml:space="preserve">
+    <value>Wachtwoorden opslaan met omkeerbare encryptie:
+
+Met deze beveiligingsinstelling wordt bepaald of wachtwoorden in het besturingssysteem moeten worden
+opgeslagen met omkeerbare encryptie.
+Het opslaan van wachtwoorden met omkeerbare codering is in feite hetzelfde als het opslaan van
+wachtwoorden in gewone tekst. 
+
+Voorkeurs instelling: Uitgeschakeld</value>
+  </data>
+  <data name="ttRembemberViewSettings" xml:space="preserve">
+    <value>Remember each folder view settings 
+
+Hiermee blijven de afzonderlijke mapinstellingen behouden wanneer u een map sluit en vervolgens weer opent. 
+Wanneer deze optie niet is ingeschakeld, worden alle standaardinstellingen voor een map hersteld wanneer u de map sluit en opnieuw opent.
+
+Voorkeursinstelling: Uit</value>
+  </data>
+  <data name="ttRemoteDesktopAddUsers" xml:space="preserve">
+    <value>Selecteer externe gebruikers voor remotedesktop:
+
+Selecteer hier de lokale gebruikers die gebruik mogen van remote desktop vanaf dit systeem. 
+Gebruikers worden toegevoegd aan de gebruikersgroep “Remote Desktop” of “Externe bureabladgebruikers”</value>
+  </data>
+  <data name="ttSavePasswordInLogFile" xml:space="preserve">
+    <value>Wachtwoorden opslaan in logboek:
+
+De opgegeven wachtwoorden worden leesbaar opgeslagen in het logboek. 
+Random gekozen wachtwoorden worden in het het invulveld leesbaar getoond indien er is gekozen om 
+het wachtwoord niet op te slaan in het logboek.</value>
+  </data>
+  <data name="ttShowHiddenFolders" xml:space="preserve">
+    <value>Show hidden files and folders:
+
+Hiermee worden verborgen bestanden weergegeven in de lijst met bestanden in Windows Verkenner.
+
+Voorkeursinstelling: Aan</value>
+  </data>
+  <data name="ttShowNTFSinBlue" xml:space="preserve">
+    <value>Show encrypted or compressed NTFS files in color
+
+Hiermee worden de namen van de bestanden die u comprimeert of codeert op NTFS-stations,
+weergegeven in kleur wanneer u de bestanden weergeeft in een mapvenster. 
+Dit is niet van toepassing op mappen die u comprimeert met hulpprogramma’s voor ZIP-compressie.
+
+Voorkeursinstelling: Aan</value>
+  </data>
+  <data name="ttShutdownEventTracker" xml:space="preserve">
+    <value>Geef reden bij afsluiten (shutdown event tracker):
+
+Bij het afsluiten of herstarten van het systeem dient een reden voor deze actie te worden opgegeven.
+(deze functionaliteit is niet beschikbaar voor Windows XP 32 bit systemen)
+
+Voorkeursinstelling: Uit</value>
+  </data>
+  <data name="TTtcpUdp" xml:space="preserve">
+    <value>Wat is UDP TCP:
+
+TCP: Transmission Control Protocol heeft als kenmerken dat het gegevens in een stream  kan versturen,
+waarbij de garantie wordt geleverd dat de 
+gegevens aankomen zoals ze verstuurd werden, en eventuele communicatiefouten, zowel in de gegevens 
+zelf als in de volgorde van de gegevens kunnen worden opgevangen.
+
+UDP: User Datagram Proctol  is minder betrouwbaar dan TCP, maar door een
+lagere overhead wel sneller. UDP biedt geen garantie dat de gegevens werkelijk aankomen.
+
+http://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers</value>
+  </data>
+  <data name="ttChangeDefaultAccountsSavePasswordInLogFile" xml:space="preserve">
+    <value>Wachtwoorden opslaan in logboek:
+
+De opgegeven wachtwoorden worden leesbaar opgeslagen in het logboek. 
+Random gekozen wachtwoorden worden in het het invulveld leesbaar getoond indien er is gekozen om 
+het wachtwoord niet op te slaan in het logboek.</value>
+  </data>
+</root>
